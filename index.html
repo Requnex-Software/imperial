@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMPERIAL - Реальные люди. Настоящие истории</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        
+        <!-- Main Bar with Borders -->
+        <div class="header-main-row">
+          <!-- Left: Brand -->
+          <div class="header-left">
+            <img src="/logo-header.png" alt="IMPERIAL" class="logo-img">
+          </div>
+
+          <!-- Right: Lang + Social -->
+          <div class="header-right">
+             <!-- Language Switcher -->
+             <div class="lang-switch-container">
+                <div class="lang-btn" id="lang-btn">RU</div>
+                <div class="lang-dropdown" id="lang-dropdown">
+                  <div class="lang-item" data-lang="ru">Russian</div>
+                  <div class="lang-item active" data-lang="en">English</div>
+                  <div class="lang-item" data-lang="de">German</div>
+                  <div class="lang-item" data-lang="pt-br">Português</div>
+                  <div class="lang-item" data-lang="th">Thai</div>
+                  <div class="lang-item" data-lang="uk">Ukrainian</div>
+                </div>
+             </div>
+
+             <!-- Social Icons -->
+             <div class="header-socials">
+               <a href="https://instagram.com" class="social-icon"><i data-lucide="instagram"></i></a>
+               <a href="https://telegram.org" class="social-icon"><i data-lucide="send"></i></a>
+               <a href="https://whatsapp.com" class="social-icon"><i data-lucide="phone"></i></a>
+             </div>
+          </div>
+        </div>
+
+        <!-- Tagline below bottom border -->
+        <div class="header-tagline-row">
+          <p class="header-tagline">Реальные люди. Настоящие истории</p>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <img src="/hero-img-hands.png" alt="Couple Hands" class="hero-bg-img">
+      <div class="hero-bg-overlay"></div> <!-- Re-added overlay for potential use or styling -->
+      
+      <div class="container">
+        <h1 class="hero-title">
+          СОЗДАЙТЕ<br>
+          <span>свою</span><br>
+          ИСТОРИЮ ЛЮБВИ
+        </h1>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features">
+      <div class="container features-grid">
+        <!-- Card 1: Globe -->
+        <div class="feature-card card-globe">
+          <div class="card-text-overlay top-left">
+            <p data-key="card_globe">К нам присоединяются женщины со всего мира:<br>Латинская Америка, Европа и Азия</p>
+          </div>
+          <img src="/card 1-2.png" alt="Card 1" class="card-full-img">
+        </div>
+
+        <!-- Card 2: Couple -->
+        <div class="feature-card card-couple-bouquet">
+           <div class="card-text-overlay top-left">
+            <p data-key="card_couple">Нам доверяют те, кто знает цену<br>качеству — лидеры, бизнесмены<br>и звезды</p>
+          </div>
+           <img src="/card 2-2.png" alt="Card 2" class="card-full-img">
+        </div>
+
+        <!-- Card 3: Pregnant -->
+        <div class="feature-card card-pregnant">
+           <div class="card-text-overlay bottom-left">
+            <p data-key="card_pregnant">Подарили миру<br>211 малышей</p>
+          </div>
+           <img src="/card 3-2.png" alt="Card 3" class="card-full-img">
+        </div>
+
+        <!-- Card 4: Free (Center) -->
+        <div class="feature-card card-free">
+           <div class="card-text-overlay centered">
+             <p data-key="card_free_title">Участие в нашем клубе</p>
+             <div class="free-badge" data-key="card_free_badge">абсолютно бесплатно</div>
+           </div>
+           <img src="/card 4-2.png" alt="Card 4" class="card-full-img">
+        </div>
+
+        <!-- Card 5: Ring -->
+        <div class="feature-card card-ring">
+           <div class="card-text-overlay top-left">
+            <p data-key="card_ring">Мы помогли создать<br>свыше 1 257 пар</p>
+          </div>
+           <img src="/card 5-2.png" alt="Card 5" class="card-full-img">
+           <img src="/20251031_1331_Emerald Elegance Displayed_remix_01k8x0g44ffv3bw5bw4ks4p9s5 1.png" alt="Ring Overlay" class="ring-overlay">
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+      <div class="container">
+        <h2 class="section-title centered">
+          ПОЧЕМУ НАС <span class="script-font gold-text">Выбирают</span><br>
+          ТЕ, КТО ДОВЕРЯЕТ ТОЛЬКО<br>
+          ПРОФЕССИОНАЛАМ
+        </h2>
+        <div class="why-us-content">
+           <div class="why-us-stack">
+             <!-- Center Image -->
+             <img src="/freepik__enhance__49670 1.png" alt="Romantic Couple" class="why-us-center-img">
+             
+             <!-- Left Column -->
+             <div class="why-col left-col">
+               <div class="why-item">
+                 <img src="/icon-headset.png" alt="Assistant" class="why-icon">
+                 <div class="why-text">
+                   <h3 data-key="why_assistant_title">Ассистент</h3>
+                   <p data-key="why_assistant_desc">Персональный ассистент, который ответит в течение 10 минут</p>
+                 </div>
+               </div>
+               <div class="why-divider"></div>
+               
+               <div class="why-item">
+                 <img src="/icon-clock.png" alt="Clock" class="why-icon">
+                 <div class="why-text">
+                   <h3 data-key="why_registration_title">Регистрация 10 минут</h3>
+                   <p data-key="why_registration_desc">Быстрая регистрация — займет всего 10 минут</p>
+                 </div>
+               </div>
+               <div class="why-divider"></div>
+
+               <div class="why-item">
+                 <img src="/icon-calendar.png" alt="Calendar" class="why-icon">
+                 <div class="why-text">
+                   <h3 data-key="why_60days_title">60 дней</h3>
+                   <p data-key="why_60days_desc">Прекратите участие в клубе через 60 дней при необходимости</p>
+                 </div>
+               </div>
+             </div>
+
+             <!-- Right Column -->
+             <div class="why-col right-col">
+               <div class="why-item">
+                 <img src="/icon-shield.png" alt="Shield" class="why-icon">
+                 <div class="why-text">
+                   <h3 data-key="why_privacy_title">Конфиденциальность</h3>
+                   <p data-key="why_privacy_desc">Конфиденциальность и защита данных по стандартам GDPR</p>
+                 </div>
+               </div>
+               <div class="why-divider"></div>
+
+               <div class="why-item">
+                 <img src="/icon-person.png" alt="Psychologist" class="why-icon">
+                 <div class="why-text">
+                   <h3 data-key="why_psychologist_title">Психолог</h3>
+                   <p data-key="why_psychologist_desc">Точный выбор мужчин благодаря психологам в нашей команде</p>
+                 </div>
+               </div>
+               <div class="why-divider"></div>
+
+               <div class="why-item">
+                 <img src="/icon-bolt.png" alt="Bolt" class="why-icon">
+                 <div class="why-text">
+                   <h3 data-key="why_men_title">2000+ мужчин</h3>
+                   <p data-key="why_men_desc">У нас есть более 2x тысяч успешных мужчин по всему миру</p>
+                 </div>
+               </div>
+             </div>
+
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real Stories Carousel -->
+    <section class="stories">
+      <div class="container">
+        <h2 class="section-title centered">
+          РЕАЛЬНЫЕ ИСТОРИИ<br>
+          НАСТОЯЩЕЙ <span class="script-font gold-text">Любви</span>
+        </h2>
+        
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <!-- Card 1 (Active/Large) -->
+            <div class="story-card active-card">
+              <div class="story-image-wrapper">
+                 <img src="/irina.png" alt="Ирина Петрова" class="story-img"> <!-- Placeholder -->
+                 <div class="story-overlay">
+                   <div class="story-rating"><i data-lucide="star" class="icon-star"></i> 5</div>
+                   <div class="play-btn-large"><i data-lucide="play" class="icon-play-fill"></i></div>
+                   <div class="story-info">
+                     <span class="story-name">Ирина Петрова <img src="/verif.png" alt="Verified" class="icon-verify-img"></span>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="story-card">
+               <div class="story-image-wrapper">
+                 <img src="/maria.png" alt="Мария" class="story-img"> <!-- Placeholder -->
+                 <div class="story-overlay">
+                   <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
+                   <div class="story-info">
+                     <span class="story-name">Мария</span>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="story-card">
+               <div class="story-image-wrapper">
+                 <img src="/anna.png" alt="Анна" class="story-img"> <!-- Placeholder -->
+                 <div class="story-overlay">
+                   <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
+                   <div class="story-info">
+                     <span class="story-name">Анна</span>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="story-card">
+               <div class="story-image-wrapper">
+                 <img src="/nastya.png" alt="Анастасия" class="story-img"> <!-- Placeholder -->
+                 <div class="story-overlay">
+                   <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
+                   <div class="story-info">
+                     <span class="story-name">Анастасия</span>
+                   </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="carousel-nav">
+             <button class="nav-btn next"><i data-lucide="arrow-right"></i></button>
+             <button class="nav-btn prev"><i data-lucide="arrow-left"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stories Detail -->
+    <section class="stories-detail">
+      <div class="container detail-container">
+        
+        <!-- Left Column: Active Card & List -->
+        <div class="detail-left-col">
+          <!-- Active Green Card -->
+          <div class="active-story-card">
+            <div class="active-card-header">
+              <h3>ОЛЬГА И ИВАН</h3>
+              <button class="expand-btn"><i data-lucide="arrow-up"></i></button>
+            </div>
+            <div class="active-card-img-wrapper">
+              <img src="/olga-ivan.jpg" alt="Ольга и Иван" class="active-card-img"> <!-- Placeholder -->
+            </div>
+            <div class="active-card-text">
+              <p>Мы хотим выразить огромную благодарность всему коллективу агентства! К вам мы обратились уже не веря, что в наше время можно найти серьезные отношения...</p>
+            </div>
+          </div>
+
+          <!-- Accordion List -->
+          <div class="couple-names-list">
+             <div class="couple-item">
+               <h3>ТАТЬЯНА И АНДРЕЙ</h3>
+               <div class="couple-right">
+                 <img src="/thumb-tatiana.jpg" alt="" class="couple-thumb"> <!-- Placeholder -->
+                 <i data-lucide="arrow-down" class="arrow-icon"></i>
+               </div>
+             </div>
+             <div class="couple-item">
+               <h3>ВЕРОНИКА И ОЛЕГ</h3>
+               <div class="couple-right">
+                 <i data-lucide="arrow-down" class="arrow-icon"></i>
+               </div>
+             </div>
+             <div class="couple-item">
+               <h3>МАРИЯ И АЛЕКСЕЙ</h3>
+               <div class="couple-right">
+                 <i data-lucide="arrow-down" class="arrow-icon"></i>
+               </div>
+             </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Flower Decor -->
+        <div class="detail-right-col">
+          <div class="decor-flower-wrapper">
+             <img src="/flower-decor.png" alt="Flower Decor" class="flower-img"> <!-- Placeholder -->
+             <!-- Text is likely part of the image in design, but we can overlay if needed -->
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Bottom Full Width Button -->
+      <div class="container full-width-btn-container">
+         <button class="read-more-full-btn">
+           Читать историю полностью <i data-lucide="arrow-up-right"></i>
+         </button>
+      </div>
+    </section>
+
+    <!-- Lead Form -->
+    <section class="lead-form">
+      <div class="container form-container">
+        
+        <!-- Center Content -->
+        <div class="form-content-center">
+          <p class="form-subtitle centered">Сделайте первый шаг к отношениям, о которых мечтали</p>
+          <h2 class="form-title centered">ОСТАВЬТЕ ЗАЯВКУ</h2>
+          
+          <form class="application-form centered-form">
+            <!-- Name Input with Floating Label -->
+            <div class="input-wrapper">
+              <input type="text" id="form-name" class="form-input dark-input floating-input" placeholder=" " required>
+              <label for="form-name" class="floating-label">Имя</label>
+              <!-- Error message example (hidden by default) -->
+              <div class="error-message">Пожалуйста введите свое имя</div>
+              <i data-lucide="circle-alert" class="error-icon"></i>
+            </div>
+
+            <!-- Phone Input with Dropdown -->
+             <div class="input-wrapper phone-wrapper">
+                <div class="phone-prefix-container" id="phone-prefix-btn">
+                  <span class="prefix-val">+1</span>
+                  <!-- Dropdown List -->
+                  <div class="prefix-dropdown" id="prefix-dropdown">
+                    <div class="country-list" id="country-list">
+                      <!-- Countries will be populated by JS -->
+                    </div>
+                  </div>
+                </div>
+                <input type="tel" class="form-input dark-input phone-input-field" placeholder=" ">
+             </div>
+
+            <button type="submit" class="submit-btn dark-btn">Отправить</button>
+          </form>
+        </div>
+
+        <!-- Decorative Images (Absolute) -->
+        <img src="/woman-lynx.jpg" alt="" class="decor-woman-lynx"> <!-- Placeholder for right image -->
+        
+      </div>
+      <!-- Ribbon moved outside container to section level -->
+      <img src="/ribbon-green.png" alt="" class="decor-ribbon"> 
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        
+        <!-- Top Row -->
+        <div class="footer-top">
+           <div class="footer-brand">
+              <div class="footer-logo-row">
+                <img src="/logo-gold.png" alt="IMPERIAL" class="footer-logo-img"> <!-- Placeholder -->
+                <!-- Removed text span as requested -->
+              </div>
+             <p class="footer-tagline">Реальные люди. Настоящие истории</p>
+             <div class="footer-copyright-block">
+               <p>© 2026 IMPERIAL</p>
+               <p>All rights reserved</p>
+             </div>
+           </div>
+
+           <div class="footer-contact">
+             <div class="social-links-squares">
+               <a href="#" class="social-sq"><i data-lucide="instagram"></i></a>
+               <a href="#" class="social-sq"><img src="/telegram 1.png" alt="Telegram"></a> <!-- Telegram icon -->
+               <a href="#" class="social-sq"><img src="/whatsapp.png" alt="WhatsApp"></a> <!-- WhatsApp icon -->
+             </div>
+             <a href="mailto:info@imperial.com" class="footer-email">info@imperial.com</a>
+           </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="footer-bottom">
+          <div class="footer-legal">
+            <a href="#">Политика конфиденциальности</a>
+            <span class="separator">|</span>
+            <a href="#">Правила использования сервиса</a>
+          </div>
+          <div class="footer-credits">
+            Design by Alice K & ITmaestro
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- Cookies Modal -->
+    <div class="cookies-modal-overlay" id="cookies-modal">
+      <div class="cookies-modal">
+        <div class="cookies-icon">
+          <!-- Simple cookie SVG or placeholder -->
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C6A87C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+            <path d="M8.5 8.5v.01"></path>
+            <path d="M16 15.5v.01"></path>
+            <path d="M12 12v.01"></path>
+            <path d="M11 17v.01"></path>
+            <path d="M7 14v.01"></path>
+          </svg>
+        </div>
+        <h2 class="cookies-title">МЫ ИСПОЛЬЗУЕМ<br>COOKIES</h2>
+        <p class="cookies-text">
+          Чтобы сайт работал корректно и был удобным для вас, мы используем файлы cookies. Продолжая пользоваться сайтом, вы соглашаетесь с нашей <a href="#">Политикой конфиденциальности</a>.
+        </p>
+        <div class="cookies-actions">
+          <button class="cookie-btn accept-btn" id="accept-cookies">Принять все</button>
+          <button class="cookie-btn settings-btn">Настройки cookies</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="success-popup-overlay" id="success-popup">
+      <div class="success-popup">
+        <button class="close-popup" id="close-success">×</button>
+        <!-- Green Ribbon Decoration -->
+        <img src="/ribbon-green.png" alt="" class="popup-ribbon">
+        
+        <h2 class="success-title">ВАША ЗАЯВКА<br>УСПЕШНО</h2>
+        <p class="success-accent">отправлена!</p>
+        <p class="success-subtitle">Наш менеджер свяжется с вами<br>в ближайшее время</p>
+      </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
