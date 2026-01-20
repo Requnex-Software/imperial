@@ -40,8 +40,9 @@
              <!-- Social Icons -->
              <div class="header-socials">
                <a href="https://instagram.com" class="social-icon"><i data-lucide="instagram"></i></a>
-               <a href="https://telegram.org" class="social-icon"><i data-lucide="send"></i></a>
-               <a href="https://whatsapp.com" class="social-icon"><i data-lucide="phone"></i></a>
+               <a href="https://facebook.com" class="social-icon"><i data-lucide="facebook"></i></a>
+               <a href="https://telegram.org" class="social-icon"><img src="/telegram 1.png" alt="Telegram"></i></a>
+               <a href="https://whatsapp.com" class="social-icon"><img src="/whatsapp.png" alt="WhatsApp"></i></a>
              </div>
           </div>
         </div>
@@ -55,17 +56,79 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-      <img src="/hero-img-hands.png" alt="Couple Hands" class="hero-bg-img">
-      <div class="hero-bg-overlay"></div> <!-- Re-added overlay for potential use or styling -->
-      
-      <div class="container">
-        <h1 class="hero-title">
-          СОЗДАЙТЕ<br>
-          <span>свою</span><br>
-          ИСТОРИЮ ЛЮБВИ
-        </h1>
+    <section class="hero" id="hero-slider">
+      <!-- Slide 1: Hands (Existing) -->
+      <div class="hero-slide slide-hands active">
+        <img src="./handhero.png" alt="Couple Hands" class="hero-bg-img">
+        <div class="hero-bg-overlay"></div>
+        <div class="container">
+          <h1 class="hero-title">
+            ВАШ ПУТЬ К<br>
+            <span>отношениям</span><br>
+            НАЧИНАЕТСЯ С НАС
+          </h1>
+        </div>
       </div>
+
+      <!-- Slide 2: Woman with Lynx -->
+      <div class="hero-slide slide-lynx">
+        <!-- Main Lynx Image -->
+        <img src="/2slide-lynx.png" alt="Woman with Lynx" class="lynx-main-img">
+        <!-- Right Shtorka -->
+        <img src="/slide2-shtorka.png" alt="" class="lynx-shtorka-right">
+        
+        <div class="lynx-container">
+           <div class="lynx-content">
+             <div class="cat-logo-wrapper">
+               <img src="/lynx.png" alt="Emblem" class="cat-logo">
+             </div>
+             <div class="hero-main-text">
+               <span class="text-line-1">НАЙДЁМ ВАМ</span>
+               <span class="text-line-2">МУЖЧИНУ</span>
+               <span class="text-script">Мечты</span>
+             </div>
+           </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Map Split -->
+      <div class="hero-slide slide-map">
+        <!-- Left Side: Text (Black Background) -->
+        <div class="split-left">
+           <div class="split-content-wrapper">
+             <div class="cat-logo-wrapper">
+               <img src="/lynx.png" alt="Emblem" class="cat-logo">
+             </div>
+             <div class="hero-main-text">
+               <span class="text-line-1">НАЙДЁМ ВАМ</span>
+               <span class="text-line-2">МУЖЧИНУ</span>
+               <span class="text-script">Мечты</span>
+             </div>
+           </div>
+        </div>
+
+        <!-- Right Side: Map & CTA (Green Background) -->
+        <div class="split-right">
+           <!-- Map Background Layer -->
+           <div class="map-bg-layer">
+             <img src="/map.png" alt="World Map" class="map-img-absolute">
+           </div>
+           
+           <!-- Content Overlay -->
+           <div class="map-cta-container">
+             <div class="map-text-group">
+               <div class="map-cta-text">в любой точке мира</div>
+               <div class="map-cta-text">регистрация за 10 минут</div>
+             </div>
+             
+             <div class="map-btn-wrapper">
+               <button class="submit-btn dark-btn cta-btn" onclick="document.getElementById('lead-form').scrollIntoView({behavior: 'smooth'})">Оставить заявку</button>
+             </div>
+           </div>
+        </div>
+      </div>
+
+      <!-- Navigation Dots (Removed) -->
     </section>
 
     <!-- Features Grid -->
@@ -244,7 +307,7 @@
             <!-- Card 4 -->
             <div class="story-card">
                <div class="story-image-wrapper">
-                 <img src="/nastya.png" alt="Анастасия" class="story-img"> <!-- Placeholder -->
+                 <img src="/NASTYA.png" alt="Анастасия" class="story-img"> <!-- Placeholder -->
                  <div class="story-overlay">
                    <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
                    <div class="story-info">
@@ -327,7 +390,7 @@
     </section>
 
     <!-- Lead Form -->
-    <section class="lead-form">
+    <section class="lead-form" id="lead-form">
       <div class="container form-container">
         
         <!-- Center Content -->
@@ -407,7 +470,8 @@
             <a href="#">Правила использования сервиса</a>
           </div>
           <div class="footer-credits">
-            Design by Alice K & ITmaestro
+            Design by Alice K & ITmaestro <br/>
+            Developed by Oleksandr Voloshchuk & Requnex Software
           </div>
         </div>
 

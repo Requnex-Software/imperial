@@ -411,6 +411,56 @@ if (form && successPopup && closeSuccessBtn) {
   });
 }
 
+// --- Hero Slider Logic ---
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+let currentSlide = 0;
+const slideInterval = 5000; // 5 seconds per slide
+
+function showSlide(index) {
+  // Hide all
+  slides.forEach(s => {
+    s.classList.remove('active');
+    // Ensure visibility is toggled for transitions
+    s.style.opacity = '0';
+    s.style.visibility = 'hidden';
+  });
+  // dots.forEach(d => d.classList.remove('active')); // Dots removed
+
+  // Show current
+  slides[index].classList.add('active');
+  slides[index].style.opacity = '1';
+  slides[index].style.visibility = 'visible';
+  // dots[index].classList.add('active'); // Dots removed
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+// Initialize
+if (slides.length > 0) {
+  // Set initial state explicitly
+  showSlide(0);
+  
+  // Auto-rotate
+  let sliderInterval = setInterval(nextSlide, slideInterval);
+
+  // Manual navigation (Removed)
+  /*
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      clearInterval(sliderInterval); // Stop auto-rotate on manual interaction
+      currentSlide = index;
+      showSlide(currentSlide);
+      // Restart auto-rotate after delay (optional, or just leave it stopped)
+      sliderInterval = setInterval(nextSlide, slideInterval);
+    });
+  });
+  */
+}
+
 // Image Injection (Simulated for now, usually fetched)
 // In a real app, these would be set in HTML or fetched from API.
 // We are setting them here to ensure the generated images (which we will add next) are used.

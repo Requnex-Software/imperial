@@ -1,8 +1,8 @@
 :root {
   --color-dark-green: #051A16;
   --color-dark-green-light: #0B251E;
-  --color-gold: #C6A87C;
-  --color-gold-hover: #D4B98F;
+  --color-gold: #C5A067;
+  --color-gold-hover: #C5A067;
   --color-beige: #E8D4B5;
   --color-white: #FFFFFF;
   --color-gray: #A0A0A0;
@@ -101,19 +101,24 @@ body {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 30px; /* Space between Lang and Socials */
+  gap: 0; /* Remove gap between Lang and Socials */
 }
 
 /* Language Switcher Position */
 .lang-switch-container {
-  margin-left: 0; /* Reset margin */
-  margin-right: 0;
+  margin-left: 0;
+  margin-right: 0; /* Ensure no margin on the right */
 }
 
 .header-socials {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  gap: 32px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 32px;
+  height: 60px;
+  margin-left: 0; /* Removed margin to stick to language switcher */
 }
 
 .social-icon {
@@ -122,16 +127,19 @@ body {
   transition: opacity 0.3s;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .social-icon:hover {
   opacity: 1;
+  color: var(--color-gold);
 }
 
 .social-icon i {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.5px; /* Thinner outline */
+  width: 24px; /* Slightly larger */
+  height: 24px;
+  stroke-width: 1.5px;
 }
 
 /* Language Switcher */
@@ -193,7 +201,7 @@ body {
 }
 
 .lang-item:hover, .lang-item.active {
-  color: #C6A87C; /* Gold color */
+  color: var(--color-gold);
   font-weight: 700;
 }
 
@@ -223,19 +231,303 @@ body {
   opacity: 0.8;
 }
 
-/* Hero */
+/* Hero Slider */
 .hero {
   position: relative;
   height: 100vh;
-  min-height: 700px;
+  min-height: 800px;
+  width: 100%;
+  overflow: hidden;
+  background: #000; /* Default bg */
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* Slide 1: Hands (Existing) */
+.slide-hands {
+  background: url('/Rectangle 22.png') no-repeat center top;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(180deg, #041E1A 0%, #000000 100%); /* Green to Black gradient */
 }
 
+/* Slide 2: Lynx Layout */
+.slide-lynx {
+  /* User set background image here */
+  background: url('/slide2.png') no-repeat center top; 
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lynx-main-img {
+  position: absolute;
+  width: 1192px;
+  height: 1117px;
+  top: -10px;
+  left: -43px;
+  opacity: 1;
+  z-index: 20; /* Higher than text to cover it */
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.lynx-shtorka-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: auto; /* Or specific width if known, assuming auto for now */
+  z-index: 15; /* Behind main image? Or top? Assuming decoration */
+  pointer-events: none;
+}
+
+.lynx-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 5; /* Lower than image */
+}
+
+/* If the image includes the woman/lynx, we don't need this wrapper, 
+   but keeping it transparent/optional just in case */
+.lynx-image-wrapper {
+  display: none;
+}
+
+.lynx-content {
+  position: absolute;
+  right: 12%; /* Moved slightly right from 15% */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5; /* Low z-index so it goes behind main image */
+  text-align: left;
+}
+
+/* Specific Logo Size for Lynx Slide */
+.slide-lynx .cat-logo {
+  width: 96px;
+  height: 96px;
+  opacity: 1;
+}
+
+/* Slide 3: Map Split Layout */
+.slide-map {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #000; /* Fallback */
+}
+
+.split-left {
+  width: 50%;
+  height: 100%;
+  background: #000000; /* Black left side */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align content to the right (near center split) */
+  padding-right: 80px; /* Space from split line */
+  z-index: 2;
+}
+
+.split-content-wrapper {
+  text-align: left; /* Text itself is left-aligned */
+  transform: translateY(-20px); /* Visual optical adjustment */
+}
+
+.split-right {
+  width: 50%;
+  height: 100%;
+  background: url('/shtorkai2.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Map Image - Exact Positioning */
+.map-img-absolute {
+  position: absolute;
+  width: 800px;
+  height: 844px;
+  /* Coordinates converted to local context or kept as requested if container matches design width.
+     Assuming design width 1920px. Left 1109px starts from global 0. 
+     Since this is inside .split-right which starts at 50% (960px), 
+     local left = 1109 - 960 = 149px. 
+     Top 201px is relative to hero top. */
+  top: 201px; 
+  left: 80px; /* Moved left as requested */
+  opacity: 1;
+  z-index: 5;
+  object-fit: contain;
+}
+
+/* CTA Container - Exact Positioning from User */
+.map-cta-container {
+  position: absolute;
+  /* Global left 1405px. Split starts at 50% (960px). Local left = 1405 - 960 = 445px. */
+  left: 445px; 
+  /* Global top 297px. */
+  top: 297px;
+  transform: translateX(-50%); /* Center the container on the coordinate */
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto; /* Allow container to fit content */
+}
+
+/* Map Slide CTA Button Specifics */
+.slide-map .submit-btn.cta-btn {
+  width: auto; /* Allow width to grow */
+  min-width: 240px; /* Wider than before to ensure single line */
+  height: 88px;
+  padding: 10px 40px; /* Increased padding */
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, rgba(63, 112, 92, 0.9) 0%, rgba(28, 56, 48, 0.95) 100%) !important;
+  backdrop-filter: blur(4px);
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-transform: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* Force single line */
+}
+
+.slide-map .submit-btn.cta-btn:hover {
+  background: linear-gradient(180deg, rgba(75, 130, 108, 1) 0%, rgba(35, 70, 60, 1) 100%) !important;
+  border-color: #fff;
+}
+
+/* Specific Logo Size for Map Slide */
+.slide-map .cat-logo {
+  width: 96px;
+  height: 96px;
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.map-text-group {
+  margin-bottom: 20px;
+  text-align: center; /* Centered text above button */
+  width: 100%;
+}
+
+.map-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Button centered relative to this block */
+}
+
+.map-content {
+  position: relative;
+  z-index: 5;
+  color: #fff;
+  text-align: right;
+  padding-right: 100px;
+  margin-bottom: 200px; /* Push text up */
+}
+
+.map-cta-text {
+  font-size: 14px;
+  color: #E6E6E6;
+  margin-bottom: 4px;
+  font-family: var(--font-sans);
+}
+
+.map-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+}
+
+/* Shared Typography for Slides 2 & 3 */
+.cat-logo-wrapper {
+  margin-bottom: 20px;
+  padding-left: 5px;
+}
+
+.cat-logo {
+  width: 40px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.hero-main-text {
+  font-family: var(--font-sans);
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.text-line-1 {
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.text-line-2 {
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: -20px; /* Overlap with script */
+}
+
+.text-script {
+  font-family: var(--font-script);
+  font-size: 120px;
+  color: var(--color-gold);
+  line-height: 1;
+  display: block;
+  margin-left: 20px;
+}
+
+/* Slide Navigation Dots (Removed) */
+/* .hero-dots { ... } */
+
+/* Scroll Down Arrow (Removed) */
+/* .scroll-down-arrow { ... } */
+
 .hero-bg-img {
+  /* Reset previous style */
   position: absolute;
   top: 0;
   left: 50%;
@@ -243,18 +535,14 @@ body {
   width: 638px;
   height: 649px;
   object-fit: cover;
-  z-index: 10; /* Image on top of gradient but behind title/header usually, check z-index of title */
+  z-index: 10;
   pointer-events: none;
 }
 
-.hero-bg-overlay {
-  /* Overlay logic if needed, currently background is on .hero */
-  display: none;
-}
-
 .hero-title {
-  z-index: 20; /* Ensure text is above the image (z=10) */
-  margin-top: 560px; /* Push down below the hands */
+  /* Keep existing styles for Slide 1 */
+  z-index: 20;
+  margin-top: 560px;
   text-align: center;
   font-size: 64px;
   font-weight: 400;
@@ -262,7 +550,7 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--color-white);
-  text-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Stronger shadow for readability */
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
   position: relative;
 }
 
@@ -291,22 +579,28 @@ body {
 
 /* Features Grid */
 .features {
-  padding-bottom: 200px; /* Increased bottom padding significantly to make room for the ring */
-  margin-top: 108px;
+  padding-bottom: 200px;
+  /* Use Rectangle 21 as background for the second block */
+  background: url('/Rectangle 21.png') no-repeat center top;
+  background-size: cover;
   position: relative;
   z-index: 50;
   overflow: visible;
+  /* Ensure it connects seamlessly */
+  margin-top: 0; 
+  padding-top: 100px; /* Add padding since we removed margin */
 }
 
 .features::after {
+  /* Keep the fade to black at the bottom if desired, or modify */
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%; /* Start gradient from middle of the section */
+  height: 30%; /* Reduced height of fade */
   background: linear-gradient(to bottom, transparent 0%, #000000 100%);
-  z-index: -1; /* Behind content but in front of background if needed */
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -766,8 +1060,15 @@ body {
 }
 
 .play-btn-large:hover, .play-btn-small:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(197, 160, 103, 0.2);
+  border-color: var(--color-gold);
   transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-btn-large:hover .icon-play-fill,
+.play-btn-small:hover .icon-play-fill {
+  fill: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .icon-play-fill {
@@ -833,7 +1134,8 @@ body {
 
 .read-more-btn:hover {
   background: linear-gradient(90deg, #222 0%, #111 100%); /* Slightly brighter */
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .read-more-btn:active {
@@ -868,6 +1170,7 @@ body {
 
 .nav-btn.prev:hover {
   opacity: 1;
+  color: var(--color-gold);
 }
 
 .nav-btn.next:hover {
@@ -1184,7 +1487,7 @@ body {
 
 /* Hover State */
 .dark-input:hover {
-  border-color: #444;
+  border-color: var(--color-gold);
 }
 
 /* Focus / Active State */
@@ -1257,7 +1560,7 @@ body {
 }
 
 .phone-wrapper:hover {
-  border-color: #444;
+  border-color: var(--color-gold);
 }
 
 .phone-prefix-container {
@@ -1343,7 +1646,7 @@ body {
 
 .prefix-item:hover {
   background: #222;
-  color: #fff;
+  color: var(--color-gold);
 }
 
 .prefix-item.selected {
@@ -1387,8 +1690,8 @@ body {
 
 .submit-btn.dark-btn:hover {
   background: linear-gradient(to bottom, #222, #111);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #fff; /* Keep white on hover per screenshot usually, or gold if preferred */
+  border-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 .submit-btn.dark-btn:active {
@@ -1506,8 +1809,9 @@ body {
 }
 
 .cookie-btn:hover {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--color-gold);
   background: linear-gradient(to bottom, #222, #111);
+  color: var(--color-gold);
 }
 
 /* Success Popup */
@@ -1592,7 +1896,7 @@ body {
   width: 1320px;
   height: 488px;
   margin: 0 auto;
-  background-color: #031812; /* Dark Green */
+  background-color: #041E1A; /* Dark Green */
   padding: 120px 88px;
   position: relative;
   z-index: 20;
@@ -1718,7 +2022,7 @@ body {
 }
 
 .footer-legal a:hover {
-  color: #fff;
+  color: var(--color-gold);
 }
 
 .separator {
@@ -1846,7 +2150,7 @@ body {
 }
 
 .footer-legal a:hover {
-  color: #fff;
+  color: var(--color-gold);
 }
 
 .separator {
