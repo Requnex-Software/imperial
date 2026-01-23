@@ -60,6 +60,30 @@ body {
   text-transform: none;
 }
 
+/* Header Centered Mode for Slide 2 */
+.site-header.header-centered-mode .header-main-row {
+  justify-content: flex-end; /* Push right elements to the end */
+  position: relative;
+}
+
+.site-header.header-centered-mode .header-left {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  justify-content: center;
+}
+
+.site-header.header-centered-mode .header-tagline-row {
+  text-align: center;
+}
+
+.site-header.header-centered-mode .header-tagline {
+  width: 100%;
+  display: block;
+}
+
 /* Header */
 .site-header {
   position: absolute;
@@ -70,6 +94,11 @@ body {
   padding-top: 30px; /* Distance from top edge */
   background: transparent;
   border-bottom: none; /* Removed global border */
+  pointer-events: none; /* Let clicks pass through header area to slides if needed, but enable for children */
+}
+
+.site-header * {
+  pointer-events: auto; /* Re-enable clicks for header interactive elements */
 }
 
 .header-main-row {
@@ -241,6 +270,21 @@ body {
   background: #000; /* Default bg */
 }
 
+/* Desktop hero visible by default */
+.desktop-hero {
+  display: block;
+}
+
+/* Mobile hero hidden by default */
+.mobile-hero {
+  display: none;
+}
+
+/* Mobile hands section hidden by default */
+.mobile-hands-section {
+  display: none;
+}
+
 .hero-slide {
   position: absolute;
   top: 0;
@@ -261,6 +305,16 @@ body {
   z-index: 2;
 }
 
+/* Slide 2 Exception - Break Stacking Context */
+.hero-slide.slide-lynx.active {
+  z-index: auto !important; /* Allow children to interact with global stack */
+  transform: none !important; /* Ensure no transform creates context */
+  opacity: 1 !important; /* Ensure opacity doesn't create context (after transition) */
+  /* Note: During fade transition, opacity < 1 will temporarily create a context, 
+     so the image might pop over header only after transition finishes. 
+     This is a limitation of CSS stacking contexts. */
+}
+
 /* Slide 1: Hands (Existing) */
 .slide-hands {
   background: url('/Rectangle 22.png') no-repeat center top;
@@ -272,16 +326,35 @@ body {
 
 /* Slide 2: Lynx Layout */
 .slide-lynx {
-  /* User set background image here */
-  background: url('/slide2.png') no-repeat center top; 
-  background-size: cover;
+  /* Remove background from here so it doesn't cover header if z-index is high, 
+     or get trapped if z-index is low. */
+  background: none !important; 
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible !important;
 }
 
+/* Background Image Layer (Below Header) */
+.slide-lynx::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/slide2.png') no-repeat center top;
+  background-size: cover;
+  z-index: 10; /* Level 10: Above base, but BELOW Header (1000) */
+  pointer-events: none;
+}
+
+/* Main Image - Woman/Lynx (Above Header) */
 .lynx-main-img {
   position: absolute;
   width: 1192px;
@@ -289,9 +362,15 @@ body {
   top: -10px;
   left: -43px;
   opacity: 1;
-  z-index: 20; /* Higher than text to cover it */
+  z-index: 2000; /* Level 2000: ABOVE Header (1000) */
   pointer-events: none;
   object-fit: contain;
+}
+
+/* Content */
+.lynx-container {
+  z-index: 20; /* Level 20: Below Header (1000) but above BG (10) */
+  position: relative;
 }
 
 .lynx-shtorka-right {
@@ -641,7 +720,7 @@ body {
 .card-free {
   grid-column: 3 / 5;
   grid-row: 2;
-  background: radial-gradient(circle at center, #1a423a 0%, #0B251E 100%);
+  background: transparent;
   border: none;
 }
 .card-ring {
@@ -685,18 +764,7 @@ body {
 /* Maybe the images themselves are gray? Or the container background? */
 /* The body background is dark green. */
 
-/* Let's try adding a subtle green tint behind cards just in case images are transparent */
-.feature-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, #112b26 0%, #051A16 100%); /* Darker green gradient */
-  z-index: -1;
-  border-radius: 2px;
-}
+/* Removed the green tint background */
 
 .card-bg {
   width: 100%;
@@ -2162,6 +2230,25 @@ body {
   color: #444;
 }
 
+/* Responsive Scaling for Laptops (Covering 13" to 16" typically) */
+@media screen and (min-width: 900px) and (max-width: 1750px) {
+  html {
+    /* Using zoom property which works best in WebKit (Chrome, Safari, Edge) */
+    zoom: 0.85; 
+  }
+
+  /* Firefox Fallback (doesn't support zoom) */
+  @supports (-moz-appearance:none) {
+    body {
+      transform: scale(0.85);
+      transform-origin: top center;
+      width: 117.65%; /* Compensation: 100% / 0.85 */
+      height: 117.65%;
+      overflow-x: hidden;
+    }
+  }
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .features-grid {
@@ -2222,15 +2309,610 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Global */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Desktop hero hidden on mobile */
+  .desktop-hero {
+    display: none !important;
+  }
+
+  /* Mobile hero shown on mobile */
+  .mobile-hero {
+    display: block !important;
+  }
+
+  /* Mobile hands section shown on mobile */
+  .mobile-hands-section {
+    display: block !important;
+  }
+  
+  /* Header Mobile */
+  .site-header {
+    background: #041E1A;
+    position: relative;
+    height: auto;
+    padding: 0;
+    z-index: 3000;
+    padding-top: 16px;
+  }
+
+  .site-header .container {
+    padding: 0;
+  }
+
+  body {
+    background-color: #041E1A;
+  }
+
+  .header-main-row {
+    width: 343px;
+    max-width: calc(100% - 32px);
+    height: 56px;
+    margin: 0 16px;
+    padding: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  /* Logo Container */
+  .header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding-left: 0;
+  }
+
+  .logo-img {
+    content: url('/logo-gold.png');
+    width: 180px;
+    height: auto;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 56px;
+  }
+
+  /* Lang Switcher Mobile */
+  .header-socials {
+    display: none !important;
+  }
+
+  .lang-switch-container {
+    margin: 0;
+    display: flex;
+    height: 56px;
+  }
+
+  .lang-btn {
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.05) 55%, rgba(0,0,0,0) 100%);
+    font-size: 20px;
+    border-radius: 0;
+  }
+
+  .header-tagline-row {
+    width: 343px;
+    max-width: calc(100% - 32px);
+    margin: 0 16px;
+    padding-top: 18px;
+  }
+
+  .header-tagline {
+    font-family: 'Proxima Nova', var(--font-sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 0.92);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* Hero Mobile - Single Combined Section */
+  .hero {
+    height: auto;
+    min-height: auto;
+    background: #041E1A;
+    display: block;
+    padding: 0;
+  }
+
+  /* Hide desktop hero on mobile */
+  .desktop-hero {
+    display: none;
+  }
+
+  /* Show mobile hero */
+  .mobile-hero {
+    display: block;
+    padding: 40px 0 110px;
+  }
+
+  .mobile-hero .container {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  /* Mobile Hero Logo */
+  .mobile-hero-logo {
+    margin-bottom: 24px;
+  }
+
+  .mobile-cat-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  /* Mobile Hero Text */
+  .mobile-hero-text {
+    margin-bottom: 40px;
+  }
+
+  .mobile-hero-title {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .mobile-hero-script {
+    font-family: var(--font-script);
+    font-size: 64px;
+    color: var(--color-gold);
+    text-transform: none;
+    display: block;
+    margin-top: -8px;
+  }
+
+  /* Mobile Hero Subtitle */
+  .mobile-hero-subtitle {
+    margin-bottom: 24px;
+  }
+
+  .mobile-hero-subtitle p {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 4px 0;
+    line-height: 1.4;
+  }
+
+  /* Mobile CTA Button */
+  .mobile-hero-cta {
+    margin-bottom: 0;
+  }
+
+  .mobile-cta-btn {
+    width: 209px;
+    height: 88px;
+    background: linear-gradient(180deg, rgba(63, 112, 92, 0.9) 0%, rgba(28, 56, 48, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-cta-btn:hover {
+    background: linear-gradient(180deg, rgba(75, 130, 108, 1) 0%, rgba(35, 70, 60, 1) 100%);
+    border-color: #fff;
+  }
+
+  /* Mobile Hero Map */
+  .mobile-hero-map {
+    position: relative;
+    width: 100%;
+    max-width: 343px;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+
+  .mobile-map-img {
+    width: 100%;
+    height: auto;
+    opacity: 1;
+  }
+
+  /* Map overlay for text and button */
+  .mobile-map-overlay {
+    position: absolute;
+    bottom: 270px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+
+  /* Mobile Hands Section */
+  .mobile-hands-section {
+    display: block;
+    background: #041E1A;
+    padding: 0px 0 60px;
+    text-align: center;
+    margin-top: -40px;
+  }
+
+  .mobile-hands-section .container {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .mobile-hands-image {
+    margin-bottom: 24px;
+  }
+
+  .mobile-hands-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .mobile-hands-text {
+    text-align: center;
+  }
+
+  .mobile-hands-title {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 0.9;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+
+  .mobile-hands-script {
+    font-family: var(--font-script);
+    font-size: 48px;
+    color: var(--color-gold);
+    text-transform: none;
+    display: block;
+    margin: -4px 0 -8px 0;
+  }
+
+  
+  .slide-hands .hero-bg-img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain; /* Show full hands image */
+    left: auto;
+    top: auto;
+    transform: none;
+    margin-top: 8px;
+  }
+
+  .slide-hands .container {
+    margin-top: -16px;
+    z-index: 10;
+  }
+
+  .slide-hands .hero-title {
+    font-size: 32px;
+    line-height: 1;
+    margin-top: 8px;
+  }
+  
+  .slide-hands .hero-title span {
+    display: block;
+    font-size: 64px;
+    color: var(--color-gold);
+    margin: 4px 0;
+  }
+
+  /* Slide 2 & 3 Combined Mobile Look */
+  /* Hide standard Slide 2 & 3 separate blocks and restructure? 
+     Or just style them to look like one flow. */
+  
+  .slide-lynx {
+    display: none; /* We will merge Lynx into Map slide or treat them as one flow */
+  }
+
+  .slide-map {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    background: #041E1A;
+    padding-bottom: 60px;
+  }
+
+  /* Re-use Lynx elements inside Map slide if possible or just unhide Lynx and stack it?
+     Let's Unhide Lynx and style it as the top part of the "Map" section.
+  */
+  .slide-lynx {
+    display: flex;
+    background: #041E1A !important; /* Override transparent */
+    height: auto;
+    min-height: auto;
+    padding: 60px 20px 0;
+    z-index: 5;
+  }
+
+  .slide-lynx::before {
+    display: none; /* No background image */
+  }
+
+  .lynx-main-img {
+    display: none; /* Hide the big woman image for now, screenshot shows just text + map */
+    /* Wait, screenshot 2 shows Lynx logo + Text + Map. No woman? 
+       Or maybe she is there but cropped?
+       "Найдем вам мужчину мечты" + Map.
+       The woman image is NOT visible in the second screenshot provided for the "Map" section.
+    */
+  }
+  
+  .lynx-shtorka-right { display: none; }
+
+  .lynx-container {
+    height: auto;
+    margin-bottom: 24px;
+  }
+
+  .lynx-content {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .cat-logo-wrapper {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cat-logo {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    left: 98px;
+    opacity: 1;
+  }
+
+  .hero-main-text .text-line-1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+  }
+  
+  .hero-main-text .text-line-2 {
+    font-size: 32px;
+    margin-bottom: -10px;
+  }
+
+  .hero-main-text .text-script {
+    font-size: 64px;
+    margin-left: 0;
+  }
+
+  /* Subtitle "v luboy tochke mira..." */
+  .lynx-content::after {
+    content: 'в любой точке мира\Aрегистрация за 10 минут';
+    white-space: pre;
+    display: block;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    margin-top: 12px;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  /* Button "Ostavit zayavku" needs to be moved here or visible here */
+  /* In the desktop structure, the button is in Slide 3 (Map). 
+     On mobile, Slide 2 sits on top of Slide 3. */
+
+  .slide-map {
+    position: relative;
+    padding-top: 0;
+    margin-top: -12px; /* Connect with text above */
+  }
+
+  .split-left { display: none; } /* Hide left black part */
+  
+  .split-right {
+    width: 100%;
+    height: auto;
+    background: none; /* Remove shtorka bg */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* The Map Image */
+  .map-img-absolute {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: calc(100% - 32px);
+    height: auto;
+    order: 2; /* Map below button */
+    margin-top: 16px;
+    opacity: 0.6; /* Gold map */
+  }
+
+  /* The Button Container */
+  .map-cta-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    padding: 0 16px;
+    order: 1; /* Button above map */
+    margin-bottom: 16px;
+  }
+
+  .slide-map .submit-btn.cta-btn {
+    width: min(209px, calc(100% - 32px));
+    height: 88px;
+    padding: 10px 32px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(180deg, rgba(63, 112, 92, 0.9) 0%, rgba(28, 56, 48, 0.95) 100%) !important;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .map-text-group { display: none; } /* Hide extra text if any */
+
+  /* Features Grid Mobile */
+  .features {
+    background: #041E1A; /* Match theme */
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .features .container.features-grid {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
   .features-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    padding: 0;
+    align-items: center;
+  }
+
+  .feature-card {
+    width: 375px;
+    height: 360px;
+    border-radius: 0;
+    border: none;
+    padding: 24px 40px 40px 32px;
+    opacity: 1;
+  }
+
+  .card-bg {
+    opacity: 0.4; /* Darker images */
+  }
+
+  .features .card-content,
+  .features .card-text-overlay {
+    padding: 32px 48px 48px 40px;
+  }
+
+  .features .card-content p,
+  .features .card-text-overlay p {
+    font-size: 14px;
+    text-transform: uppercase; /* Match design if needed */
+  }
+
+  /* Why Us Container Width */
+  .why-us .container {
+    max-width: 343px;
+    margin: 0 16px;
+    padding: 0;
+  }
+
+  /* Why Us Mobile */
+  .why-us {
+    padding: 40px 0;
+  }
+
+  .why-us-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
   
-  .hero-title {
-    font-size: 36px;
+  .why-col {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    gap: 30px;
+  }
+
+  .left-col { text-align: left; align-items: flex-start; }
+  .right-col { text-align: left; align-items: flex-start; }
+  
+  .left-col .why-item, .right-col .why-item {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 15px;
+  }
+
+  .why-icon {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+  }
+
+  /* Hide center image */
+  .why-us-center-img { display: none; }
+
+  /* Lead Form Mobile */
+  .lead-form {
+    padding: 60px 0;
   }
   
-  .header-controls {
-    display: none; /* Hide for mobile for now or make burger menu */
+  .form-title.centered {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .application-form.centered-form {
+    gap: 20px;
+  }
+
+  .input-wrapper {
+    height: 60px;
+  }
+
+  .dark-input {
+    font-size: 14px;
+    padding-top: 20px;
+  }
+
+  .submit-btn.dark-btn {
+    height: 60px;
+    font-size: 16px;
+  }
+
+  /* Footer Mobile */
+  .footer {
+    padding: 40px 20px;
+  }
+
+  .footer-logo-img {
+    width: 120px;
   }
 }

@@ -432,6 +432,14 @@ function showSlide(index) {
   slides[index].style.opacity = '1';
   slides[index].style.visibility = 'visible';
   // dots[index].classList.add('active'); // Dots removed
+  
+  // Header centered mode for Slide 2 (index 1)
+  const header = document.querySelector('.site-header');
+  if (index === 1) {
+    header.classList.add('header-centered-mode');
+  } else {
+    header.classList.remove('header-centered-mode');
+  }
 }
 
 function nextSlide() {
@@ -441,11 +449,19 @@ function nextSlide() {
 
 // Initialize
 if (slides.length > 0) {
-  // Set initial state explicitly
-  showSlide(0);
-  
-  // Auto-rotate
-  let sliderInterval = setInterval(nextSlide, slideInterval);
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (isMobile) {
+    slides.forEach(s => {
+      s.classList.add('active');
+      s.style.opacity = '1';
+      s.style.visibility = 'visible';
+    });
+    const header = document.querySelector('.site-header');
+    if (header) header.classList.remove('header-centered-mode');
+  } else {
+    showSlide(0);
+    setInterval(nextSlide, slideInterval);
+  }
 
   // Manual navigation (Removed)
   /*
