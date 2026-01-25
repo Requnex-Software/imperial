@@ -13,6 +13,8 @@
   --padding-section: 80px 0;
 }
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -264,10 +266,11 @@ body {
 .hero {
   position: relative;
   height: 100vh;
-  min-height: 800px;
+  min-height: unset; /* или удалить */
   width: 100%;
   overflow: hidden;
   background: #000; /* Default bg */
+  
 }
 
 /* Desktop hero visible by default */
@@ -285,7 +288,14 @@ body {
   display: none;
 }
 
+
 .hero-slide {
+  position: absolute;
+  inset: 0;
+}
+
+
+/* .hero-slide {
   position: absolute;
   top: 0;
   left: 0;
@@ -303,17 +313,10 @@ body {
   opacity: 1;
   visibility: visible;
   z-index: 2;
-}
+} */
 
 /* Slide 2 Exception - Break Stacking Context */
-.hero-slide.slide-lynx.active {
-  z-index: auto !important; /* Allow children to interact with global stack */
-  transform: none !important; /* Ensure no transform creates context */
-  opacity: 1 !important; /* Ensure opacity doesn't create context (after transition) */
-  /* Note: During fade transition, opacity < 1 will temporarily create a context, 
-     so the image might pop over header only after transition finishes. 
-     This is a limitation of CSS stacking contexts. */
-}
+
 
 /* Slide 1: Hands (Existing) */
 .slide-hands {
@@ -328,7 +331,7 @@ body {
 .slide-lynx {
   /* Remove background from here so it doesn't cover header if z-index is high, 
      or get trapped if z-index is low. */
-  background: none !important; 
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -369,7 +372,7 @@ body {
 
 /* Content */
 .lynx-container {
-  z-index: 20; /* Level 20: Below Header (1000) but above BG (10) */
+  z-index: 340; /* Level 20: Below Header (1000) but above BG (10) */
   position: relative;
 }
 
@@ -390,7 +393,7 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  z-index: 5; /* Lower than image */
+  z-index: 305; /* Lower than image */
 }
 
 /* If the image includes the woman/lynx, we don't need this wrapper, 
@@ -2236,6 +2239,7 @@ body {
     /* Using zoom property which works best in WebKit (Chrome, Safari, Edge) */
     zoom: 0.85; 
   }
+  
 
   /* Firefox Fallback (doesn't support zoom) */
   @supports (-moz-appearance:none) {
@@ -2597,18 +2601,13 @@ body {
     margin: -4px 0 -8px 0;
   }
 
-  
-  .slide-hands .hero-bg-img {
-    position: relative;
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain; /* Show full hands image */
-    left: auto;
-    top: auto;
-    transform: none;
-    margin-top: 8px;
-  }
+.slide-hands .hero-bg-img {
+  position: absolute;
+  top: -120%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
 
   .slide-hands .container {
     margin-top: -16px;
@@ -2661,6 +2660,8 @@ body {
   }
 
   .lynx-main-img {
+    z-index: 30;
+    position: relative;
     display: none; /* Hide the big woman image for now, screenshot shows just text + map */
     /* Wait, screenshot 2 shows Lynx logo + Text + Map. No woman? 
        Or maybe she is there but cropped?
@@ -2684,6 +2685,7 @@ body {
     text-align: center;
     width: 100%;
     padding: 0;
+    z-index: 10 ;
   }
 
   .cat-logo-wrapper {
