@@ -23,8 +23,12 @@
       <div class="header-main-row">
         <!-- Left: Brand -->
         <div class="header-left">
-          <img src="/logo-header.png" alt="IMPERIAL" class="logo-img">
+          <div class="header-brand">
+            <img src="/logo-header.png" alt="IMPERIAL" class="logo-img">
+            <p class="header-tagline">Реальные люди. Настоящие истории</p>
+          </div>
         </div>
+
 
         <!-- Right: Lang + Social -->
         <div class="header-right">
@@ -51,10 +55,7 @@
         </div>
       </div>
 
-      <!-- Tagline below bottom border -->
-      <div class="header-tagline-row">
-        <p class="header-tagline">Реальные люди. Настоящие истории</p>
-      </div>
+
 
     </div>
 
@@ -591,500 +592,140 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
 
-  <!-- <script>
-gsap.registerPlugin(ScrollTrigger);
 
-/* =====================================================
-   INITIAL SETUP (START STATES)
-   Define how elements look BEFORE animation starts
-===================================================== */
+<script>
+  gsap.registerPlugin(ScrollTrigger)
 
-/* Keep header always visible and independent from scroll pin */
-gsap.set(".site-header", {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  width: "100%",
-  zIndex: 9999
-});
+  // refs
+  const header = document.querySelector('.site-header')
+  const headerBrand = document.querySelector('.header-brand')
+  const headerRow = document.querySelector('.header-main-row')
+  const isMobile = window.innerWidth <= 768
 
-/* Hide slides that should not be visible at start */
-gsap.set(".slide-hands, .slide-map", { autoAlpha: 0 });
+  // header fixed
+  gsap.set(".site-header", {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    zIndex: 9999
+  })
 
-/* Map slide starts outside viewport on the right */
-gsap.set(".slide-map", { x: "100%" });
+  if (!isMobile) {
 
-/* Hands image starts higher and invisible */
-gsap.set(".slide-hands .hero-bg-img", {
-  y: "-25%",
-  opacity: 0
-});
+    // ===== LAYERS (КРИТИЧНО) =====
+    gsap.set(".slide-hands", { zIndex: 1 })
+    gsap.set(".slide-lynx", { zIndex: 2 })
+    gsap.set(".slide-map",   { zIndex: 3 })
 
-/* Hands text starts lower and invisible */
-gsap.set(".slide-hands .hero-title", {
-  y: 60,
-  opacity: 0
-});
+    // ===== START STATES =====
+    header.classList.remove('header-centered-mode')
 
-/* ---------------- MAP CONTENT INITIAL STATE ---------------- */
+    gsap.set(".slide-hands", { autoAlpha: 0 })
+    gsap.set(".slide-map",   { autoAlpha: 0, x: "100%", pointerEvents: "none" })
 
-/* Emblem (logo) */
-gsap.set(".slide-map .cat-logo", {
-  scale: 0.85,
-  opacity: 0
-});
+    gsap.set(".slide-hands .hero-bg-img", { y: "-25%", opacity: 0 })
+    gsap.set(".slide-hands .hero-title",   { y: 60, opacity: 0 })
 
-/* Main headline text */
-gsap.set(".slide-map .text-line-1, .slide-map .text-line-2, .slide-map .text-script", {
-  y: 30,
-  opacity: 0
-});
+    gsap.set(".slide-map .cat-logo", { scale: 0.85, opacity: 0 })
+    gsap.set(
+      ".slide-map .text-line-1, .slide-map .text-line-2, .slide-map .text-script",
+      { y: 30, opacity: 0 }
+    )
+    gsap.set(".slide-map .cta-btn", { y: 20, opacity: 0 })
 
-/* Subtitle texts */
-gsap.set(".slide-map .map-cta-text", {
-  y: 20,
-  opacity: 0
-});
-
-/* CTA button */
-gsap.set(".slide-map .cta-btn", {
-  y: 20,
-  opacity: 0
-});
-
-/* =====================================================
-   MAIN TIMELINE
-   Scroll-driven, pinned cinematic sequence
-===================================================== */
-
-const tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "+=2800",
-    scrub: true,     // animation is linked to scroll position
-    pin: true,       // hero section stays fixed during animation
-    pinSpacing: true
-  }
-});
-
-/* =====================================================
-   PHASE 1 — LYNX (INTRO SCENE)
-===================================================== */
-
-/* Intro text fades in and moves up slightly */
-tl.from(".slide-lynx .hero-main-text", {
-  y: 80,
-  opacity: 0,
-  duration: 1,
-  ease: "power3.out"
-}, 0);
-
-/* Lynx slide exits to the left */
-tl.to(".slide-lynx", {
-  x: "-100%",
-  autoAlpha: 0,
-  duration: 1.2,
-  ease: "power2.inOut"
-}, 1.4);
-
-/* =====================================================
-   PHASE 2 — MAP (INFORMATION + CTA)
-===================================================== */
-
-/* Map slide enters from the right */
-tl.to(".slide-map", {
-  x: "0%",
-  autoAlpha: 1,
-  duration: 1.2,
-  ease: "power2.inOut"
-}, 1.4);
-
-/* World map image drops in softly */
-tl.from(".slide-map .map-img-absolute", {
-  y: -100,
-  opacity: 0,
-  duration: 1,
-  ease: "power3.out"
-}, 1.6);
-
-/* -------- MAP CONTENT ANIMATION -------- */
-
-/* Emblem appears */
-tl.to(".slide-map .cat-logo", {
-  scale: 1,
-  opacity: 1,
-  duration: 0.6,
-  ease: "power2.out"
-}, 1.9);
-
-/* Headline lines appear one by one */
-tl.to(".slide-map .text-line-1", {
-  y: 0,
-  opacity: 1,
-  duration: 0.5
-}, 2.1);
-
-tl.to(".slide-map .text-line-2", {
-  y: 0,
-  opacity: 1,
-  duration: 0.5
-}, 2.25);
-
-/* Script word appears slightly later */
-tl.to(".slide-map .text-script", {
-  y: 0,
-  opacity: 1,
-  duration: 0.6,
-  ease: "power2.out"
-}, 2.4);
-
-/* Subtitle texts */
-tl.to(".slide-map .map-cta-text", {
-  y: 0,
-  opacity: 1,
-  duration: 0.4,
-  stagger: 0.15
-}, 2.6);
-
-/* CTA button appears last */
-tl.to(".slide-map .cta-btn", {
-  y: 0,
-  opacity: 1,
-  duration: 0.6,
-  ease: "power2.out"
-}, 2.9);
-
-/* =====================================================
-   PHASE 2.5 — OVERLAP (MAP → HANDS)
-   Prevents black screen by overlapping scenes
-===================================================== */
-
-/* Hands slide becomes visible BEFORE map leaves */
-tl.to(".slide-hands", {
-  autoAlpha: 1,
-  duration: 0.3
-}, 3.2);
-
-/* Hands image starts appearing while map is still visible */
-tl.to(".slide-hands .hero-bg-img", {
-  y: "0%",
-  opacity: 1,
-  duration: 1.6,
-  ease: "power3.out"
-}, 3.2);
-
-/* Map slide exits only after hands are visible */
-tl.to(".slide-map", {
-  x: "-100%",
-  autoAlpha: 0,
-  duration: 1.2,
-  ease: "power2.inOut"
-}, 3.8);
-
-/* =====================================================
-   PHASE 3 — HANDS (EMOTIONAL FINAL)
-===================================================== */
-
-/* Small extra movement for realistic weight */
-tl.to(".slide-hands .hero-bg-img", {
-  y: "3%",
-  duration: 0.6,
-  ease: "power1.out"
-}, 5.2);
-
-/* Final text appears after image settles */
-tl.to(".slide-hands .hero-title", {
-  y: 0,
-  opacity: 1,
-  duration: 0.8,
-  ease: "power2.out"
-}, 5);
-
-</script>
- -->
-
-
-  <script>
-    gsap.registerPlugin(ScrollTrigger)
-
-    // Определяем мобильное устройство
-    const isMobile = window.innerWidth <= 768
-
-    /* =====================================================
-       INITIAL SETUP (START STATES)
-    ===================================================== */
-
-    /* Всегда держим header видимым */
-    gsap.set(".site-header", {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      zIndex: 9999
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=2800",
+        scrub: true,
+        pin: true
+      }
     })
 
-    /* =====================================================
-       DESKTOP ANIMATION (> 768px)
-    ===================================================== */
-    if (!isMobile) {
-      // Скрываем слайды, которые не должны быть видны в начале
-      gsap.set(".slide-hands, .slide-map", { autoAlpha: 0 })
+    // ===== LYNX В ЦЕНТРЕ =====
+    tl.add(() => {
+      header.classList.add('header-centered-mode')
+    }, 0)
 
-      // Map slide стартует справа за экраном
-      gsap.set(".slide-map", { x: "100%" })
+    // ===== УХОД LYNX (ПОЛНОСТЬЮ) =====
+    tl.to(".slide-lynx", {
+      x: "-100%",
+      autoAlpha: 0,
+      pointerEvents: "none",
+      duration: 1.2,
+      ease: "power2.inOut"
+    }, 1.4)
 
-      // Hands image стартует выше и невидим
-      gsap.set(".slide-hands .hero-bg-img", {
-        y: "-25%",
-        opacity: 0
-      })
+    // ===== ПЕРЕЕЗД ЛОГО ВЛЕВО =====
+    tl.to(headerBrand, {
+      x: () => {
+        const brandRect = headerBrand.getBoundingClientRect()
+        const rowRect   = headerRow.getBoundingClientRect()
+        return rowRect.left - brandRect.left
+      },
+      duration: 1,
+      ease: "power3.inOut"
+    }, 1.4)
 
-      // Hands text стартует ниже и невидим
-      gsap.set(".slide-hands .hero-title", {
-        y: 60,
-        opacity: 0
-      })
+    // ===== ТОЛЬКО ПОСЛЕ УХОДА LYNX — MAP =====
+    tl.set(".slide-map", {
+      autoAlpha: 1,
+      pointerEvents: "auto"
+    }, 2.6)
 
-      /* MAP CONTENT INITIAL STATE */
-      gsap.set(".slide-map .cat-logo", {
-        scale: 0.85,
-        opacity: 0
-      })
+    tl.to(".slide-map", {
+      x: "0%",
+      duration: 1.2,
+      ease: "power2.inOut"
+    }, 2.6)
 
-      gsap.set(".slide-map .text-line-1, .slide-map .text-line-2, .slide-map .text-script", {
-        y: 30,
-        opacity: 0
-      })
+    // ===== ВОЗВРАТ HEADER В НОРМУ =====
+    tl.add(() => {
+      header.classList.remove('header-centered-mode')
+      gsap.set(headerBrand, { clearProps: "x" })
+    }, 2.6)
 
-      gsap.set(".slide-map .map-cta-text", {
-        y: 20,
-        opacity: 0
-      })
+    // ===== MAP CONTENT =====
+    tl.from(".slide-map .map-img-absolute", {
+      y: -100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    }, 2.8)
 
-      gsap.set(".slide-map .cta-btn", {
-        y: 20,
-        opacity: 0
-      })
+    tl.to(".slide-map .cat-logo",      { scale: 1, opacity: 1, duration: 0.6 }, 3.0)
+    tl.to(".slide-map .text-line-1",   { y: 0, opacity: 1 }, 3.2)
+    tl.to(".slide-map .text-line-2",   { y: 0, opacity: 1 }, 3.35)
+    tl.to(".slide-map .text-script",   { y: 0, opacity: 1 }, 3.5)
+    tl.to(".slide-map .map-cta-text",  { y: 0, opacity: 1, stagger: 0.15 }, 3.7)
+    tl.to(".slide-map .cta-btn",       { y: 0, opacity: 1 }, 4.0)
 
-      /* =====================================================
-         MAIN TIMELINE - DESKTOP
-      ===================================================== */
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "+=2800",
-          scrub: true,
-          pin: true,
-          pinSpacing: true
-        }
-      })
+    // ===== ВОЗВРАТ HANDS =====
+    tl.to(".slide-hands", { autoAlpha: 1 }, 4.4)
 
-      /* PHASE 1 — LYNX */
-      tl.from(".slide-lynx .hero-main-text", {
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, 0)
+    tl.to(".slide-hands .hero-bg-img", {
+      y: "0%",
+      opacity: 1,
+      duration: 1.6
+    }, 4.4)
 
-      tl.to(".slide-lynx", {
-        x: "-100%",
-        autoAlpha: 0,
-        duration: 1.2,
-        ease: "power2.inOut"
-      }, 1.4)
+    tl.to(".slide-map", {
+      x: "-100%",
+      autoAlpha: 0,
+      pointerEvents: "none",
+      duration: 1.2
+    }, 5.2)
 
-      /* PHASE 2 — MAP */
-      tl.to(".slide-map", {
-        x: "0%",
-        autoAlpha: 1,
-        duration: 1.2,
-        ease: "power2.inOut"
-      }, 1.4)
+    tl.to(".slide-hands .hero-title", {
+      y: 0,
+      opacity: 1
+    }, 6.2)
+  }
+</script>
 
-      tl.from(".slide-map .map-img-absolute", {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, 1.6)
 
-      /* MAP CONTENT */
-      tl.to(".slide-map .cat-logo", {
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, 1.9)
-
-      tl.to(".slide-map .text-line-1", {
-        y: 0,
-        opacity: 1,
-        duration: 0.5
-      }, 2.1)
-
-      tl.to(".slide-map .text-line-2", {
-        y: 0,
-        opacity: 1,
-        duration: 0.5
-      }, 2.25)
-
-      tl.to(".slide-map .text-script", {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, 2.4)
-
-      tl.to(".slide-map .map-cta-text", {
-        y: 0,
-        opacity: 1,
-        duration: 0.4,
-        stagger: 0.15
-      }, 2.6)
-
-      tl.to(".slide-map .cta-btn", {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.out"
-      }, 2.9)
-
-      /* PHASE 2.5 — OVERLAP */
-      tl.to(".slide-hands", {
-        autoAlpha: 1,
-        duration: 0.3
-      }, 3.2)
-
-      tl.to(".slide-hands .hero-bg-img", {
-        y: "0%",
-        opacity: 1,
-        duration: 1.6,
-        ease: "power3.out"
-      }, 3.2)
-
-      tl.to(".slide-map", {
-        x: "-100%",
-        autoAlpha: 0,
-        duration: 1.2,
-        ease: "power2.inOut"
-      }, 3.8)
-
-      /* PHASE 3 — HANDS */
-      tl.to(".slide-hands .hero-bg-img", {
-        y: "3%",
-        duration: 0.6,
-        ease: "power1.out"
-      }, 5.2)
-
-      tl.to(".slide-hands .hero-title", {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out"
-      }, 5)
-    }
-
-    /* =====================================================
-       MOBILE ANIMATION (<= 768px)
-    ===================================================== */
-    else {
-      /* Mobile Hero Animation */
-      const mobileTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".mobile-hero",
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      })
-
-      // Logo появление
-      mobileTl.from(".mobile-cat-logo", {
-        scale: 0.5,
-        opacity: 0,
-        duration: 0.6,
-        ease: "back.out(1.7)"
-      })
-
-      // Текст построчно
-      mobileTl.from(".mobile-hero-title", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out"
-      }, "-=0.3")
-
-      // Map появление
-      mobileTl.from(".mobile-map-img", {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4")
-
-      // Overlay content
-      mobileTl.from(".mobile-hero-subtitle p", {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.5")
-
-      mobileTl.from(".mobile-cta-btn", {
-        scale: 0.95,
-        opacity: 0,
-        duration: 0.5,
-        ease: "back.out(1.5)"
-      }, "-=0.3")
-
-      /* Mobile Hands Section Animation */
-      const handsTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".mobile-hands-section",
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse"
-        }
-      })
-
-      handsTimeline.from(".mobile-hands-img", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out"
-      })
-
-      handsTimeline.from(".mobile-hands-title", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4")
-    }
-
-    /* =====================================================
-       RESPONSIVE HANDLER - Перезагрузка при изменении размера
-    ===================================================== */
-    let resizeTimer
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(() => {
-        const newIsMobile = window.innerWidth <= 768
-        const currentIsMobile = !document.querySelector('.desktop-hero') ||
-          getComputedStyle(document.querySelector('.desktop-hero')).display === 'none'
-
-        // Перезагружаем страницу если изменился режим desktop/mobile
-        if (newIsMobile !== currentIsMobile) {
-          location.reload()
-        }
-      }, 250)
-    });
-
-  </script>
 
 </body>
 
