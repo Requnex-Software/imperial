@@ -2496,6 +2496,7 @@ body {
 
   .lang-switch-container {
     margin: 0;
+    margin-left: -60px;
     display: flex;
     height: 56px;
   }
