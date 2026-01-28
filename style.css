@@ -2427,9 +2427,12 @@ body {
     background: #041E1A;
     position: relative;
     height: auto;
-    padding: 9px;
+    padding: 10px 0 ;
     z-index: 3000;
     padding-top: 16px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
   }
 
   .site-header .container {
@@ -3568,7 +3571,7 @@ body {
     opacity: 0;
     
     width: 300px;
-    left: 170px;
+    left: 120px;
   }
 
   .decor-ribbon {
