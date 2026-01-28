@@ -3619,3 +3619,97 @@ body {
   .feature-card:nth-child(4) { animation-delay: 0.4s; }
   .feature-card:nth-child(5) { animation-delay: 0.5s; }
 }
+
+/* === ПРОСТОЕ УМЕНЬШЕНИЕ ИНПУТОВ НА МОБИЛКЕ === */
+@media (max-width: 768px) {
+  /* Уменьшаем всю форму */
+  .lead-form {
+    padding: 60px 0 100px !important;
+  }
+  
+  /* Уменьшаем контейнер формы */
+  .form-content-center {
+    width: 100% !important;
+    max-width: 343px !important;
+    margin: 0 auto !important;
+  }
+  
+  /* Уменьшаем заголовки */
+  .form-title.centered {
+    font-size: 32px !important;
+    margin-bottom: 30px !important;
+  }
+  
+  .form-subtitle.centered {
+    font-size: 14px !important;
+    margin-bottom: 30px !important;
+  }
+  
+  /* Уменьшаем саму форму */
+  .application-form.centered-form {
+    width: 100% !important;
+    max-width: 343px !important;
+    gap: 20px !important;
+  }
+  
+  /* === ГЛАВНОЕ: Уменьшаем инпуты === */
+  .input-wrapper {
+    height: 56px !important; /* Было 80px, стало 56px */
+  }
+  
+  .dark-input {
+    height: 56px !important;
+    padding: 20px 16px 6px !important; /* Уменьшили padding */
+    font-size: 16px !important;
+  }
+  
+  /* Лейбл делаем меньше */
+  .floating-label {
+    font-size: 14px !important;
+    left: 16px !important;
+  }
+  
+  .floating-input:focus + .floating-label,
+  .floating-input:not(:placeholder-shown) + .floating-label {
+    top: 12px !important;
+    font-size: 11px !important;
+  }
+  
+  /* Уменьшаем телефонный инпут */
+  .phone-prefix-container {
+    width: 70px !important; /* Было 80px */
+    font-size: 16px !important;
+  }
+  
+  .phone-input-field {
+    font-size: 16px !important;
+    padding: 0 12px !important;
+  }
+  
+  /* Уменьшаем кнопку отправки */
+  .submit-btn.dark-btn {
+    height: 56px !important; /* Такая же высота как инпуты */
+    font-size: 16px !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .input-wrapper {
+    height: 52px !important; /* Еще чуть меньше */
+  }
+  
+  .dark-input {
+    height: 52px !important;
+    padding: 18px 12px 4px !important;
+  }
+  
+  .phone-prefix-container {
+    width: 65px !important;
+  }
+  
+  .submit-btn.dark-btn {
+    height: 52px !important;
+  }
+}
