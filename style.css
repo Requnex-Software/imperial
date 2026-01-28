@@ -2070,8 +2070,8 @@ body {
 }
 
 .social-sq {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
   display: flex;
@@ -2088,8 +2088,8 @@ body {
 }
 
 .social-sq img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
 
@@ -2169,7 +2169,7 @@ body {
 }
 
 .footer-tagline {
-  font-size: 12px;
+  font-size: 16px;
   color: #fff;
   opacity: 0.8;
 }
@@ -2393,7 +2393,7 @@ body {
     justify-content: center;
   }
   .footer-bottom {
-    flex-direction: column;
+
     gap: 20px;
     align-items: center;
     display: flex;
@@ -3045,7 +3045,7 @@ body {
   }
 
   .footer-logo-img {
-    width: 120px;
+    width: 174px;
   }
 }
 
@@ -3579,7 +3579,7 @@ body {
     animation: slideInFromLeft 1s ease-out 2.2s both;
     opacity: 0;
 
-    margin-top: 220px;
+    margin-top: 190px;
     width: 350px;
     margin-left: -30px;
   }
