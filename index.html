@@ -612,20 +612,19 @@
   })
 
   if (!isMobile) {
-
     // ===== LAYERS (КРИТИЧНО) =====
     gsap.set(".slide-hands", { zIndex: 1 })
     gsap.set(".slide-lynx", { zIndex: 2 })
-    gsap.set(".slide-map",   { zIndex: 3 })
+    gsap.set(".slide-map", { zIndex: 3 })
 
     // ===== START STATES =====
     header.classList.remove('header-centered-mode')
 
     gsap.set(".slide-hands", { autoAlpha: 0 })
-    gsap.set(".slide-map",   { autoAlpha: 0, x: "100%", pointerEvents: "none" })
+    gsap.set(".slide-map", { autoAlpha: 0, x: "100%", pointerEvents: "none" })
 
     gsap.set(".slide-hands .hero-bg-img", { y: "-25%", opacity: 0 })
-    gsap.set(".slide-hands .hero-title",   { y: 60, opacity: 0 })
+    gsap.set(".slide-hands .hero-title", { y: 60, opacity: 0 })
 
     gsap.set(".slide-map .cat-logo", { scale: 0.85, opacity: 0 })
     gsap.set(
@@ -639,8 +638,9 @@
         trigger: ".hero",
         start: "top top",
         end: "+=2800",
-        scrub: true,
-        pin: true
+        scrub: 2, // Увеличил для плавности
+        pin: true,
+        anticipatePin: 1 // Добавил для плавности pin
       }
     })
 
@@ -649,27 +649,27 @@
       header.classList.add('header-centered-mode')
     }, 0)
 
-    // ===== УХОД LYNX (ПОЛНОСТЬЮ) =====
+    // ===== УХОД LYNX (более плавно) =====
     tl.to(".slide-lynx", {
       x: "-100%",
       autoAlpha: 0,
       pointerEvents: "none",
-      duration: 1.2,
-      ease: "power2.inOut"
+      duration: 1.5, // Увеличил длительность
+      ease: "power3.inOut" // Более плавная easing функция
     }, 1.4)
 
-    // ===== ПЕРЕЕЗД ЛОГО ВЛЕВО =====
+    // ===== ПЕРЕЕЗД ЛОГО ВЛЕВО (более плавно) =====
     tl.to(headerBrand, {
       x: () => {
         const brandRect = headerBrand.getBoundingClientRect()
-        const rowRect   = headerRow.getBoundingClientRect()
+        const rowRect = headerRow.getBoundingClientRect()
         return rowRect.left - brandRect.left
       },
-      duration: 1,
-      ease: "power3.inOut"
+      duration: 1.2, // Увеличил длительность
+      ease: "power3.inOut" // Более плавная easing функция
     }, 1.4)
 
-    // ===== ТОЛЬКО ПОСЛЕ УХОДА LYNX — MAP =====
+    // ===== ТОЛЬКО ПОСЛЕ УХОДА LYNX — MAP (более плавно) =====
     tl.set(".slide-map", {
       autoAlpha: 1,
       pointerEvents: "auto"
@@ -677,8 +677,8 @@
 
     tl.to(".slide-map", {
       x: "0%",
-      duration: 1.2,
-      ease: "power2.inOut"
+      duration: 1.5, // Увеличил длительность
+      ease: "power3.out" // Более плавная easing функция
     }, 2.6)
 
     // ===== ВОЗВРАТ HEADER В НОРМУ =====
@@ -687,42 +687,262 @@
       gsap.set(headerBrand, { clearProps: "x" })
     }, 2.6)
 
-    // ===== MAP CONTENT =====
+    // ===== MAP CONTENT (более плавно) =====
     tl.from(".slide-map .map-img-absolute", {
       y: -100,
       opacity: 0,
-      duration: 1,
-      ease: "power3.out"
+      duration: 1.2, // Увеличил длительность
+      ease: "power3.out" // Более плавная easing функция
     }, 2.8)
 
-    tl.to(".slide-map .cat-logo",      { scale: 1, opacity: 1, duration: 0.6 }, 3.0)
-    tl.to(".slide-map .text-line-1",   { y: 0, opacity: 1 }, 3.2)
-    tl.to(".slide-map .text-line-2",   { y: 0, opacity: 1 }, 3.35)
-    tl.to(".slide-map .text-script",   { y: 0, opacity: 1 }, 3.5)
-    tl.to(".slide-map .map-cta-text",  { y: 0, opacity: 1, stagger: 0.15 }, 3.7)
-    tl.to(".slide-map .cta-btn",       { y: 0, opacity: 1 }, 4.0)
+    tl.to(".slide-map .cat-logo", {
+      scale: 1,
+      opacity: 1,
+      duration: 0.8, // Увеличил длительность
+      ease: "power2.out"
+    }, 3.0)
 
-    // ===== ВОЗВРАТ HANDS =====
-    tl.to(".slide-hands", { autoAlpha: 1 }, 4.4)
+    tl.to(".slide-map .text-line-1", {
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      ease: "power2.out"
+    }, 3.2)
+
+    tl.to(".slide-map .text-line-2", {
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      ease: "power2.out"
+    }, 3.35)
+
+    tl.to(".slide-map .text-script", {
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      ease: "power2.out"
+    }, 3.5)
+
+    tl.to(".slide-map .map-cta-text", {
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.2, // Увеличил задержку
+      ease: "power2.out"
+    }, 3.7)
+
+    tl.to(".slide-map .cta-btn", {
+      y: 0,
+      opacity: 1,
+      duration: 0.8, // Увеличил длительность
+      ease: "power2.out"
+    }, 4.0)
+
+    // ===== ВОЗВРАТ HANDS (более плавно) =====
+    tl.to(".slide-hands", {
+      autoAlpha: 1,
+      duration: 0.5
+    }, 4.4)
 
     tl.to(".slide-hands .hero-bg-img", {
       y: "0%",
       opacity: 1,
-      duration: 1.6
+      duration: 2.0, // Увеличил длительность для плавности
+      ease: "power3.out" // Более плавная easing функция
     }, 4.4)
 
+    // ===== УХОД MAP (более плавно) =====
     tl.to(".slide-map", {
       x: "-100%",
       autoAlpha: 0,
       pointerEvents: "none",
-      duration: 1.2
+      duration: 1.5, // Увеличил длительность
+      ease: "power3.inOut" // Более плавная easing функция
     }, 5.2)
 
+    // ===== ТЕКСТ HANDS (более плавно) =====
     tl.to(".slide-hands .hero-title", {
       y: 0,
-      opacity: 1
+      opacity: 1,
+      duration: 1.2, // Увеличил длительность
+      ease: "power3.out" // Более плавная easing функция
     }, 6.2)
   }
+</script>
+
+<script>
+  // Анимации для мобильной версии
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth <= 768) {
+      // Элементы для анимации
+      const animatedElements = document.querySelectorAll('.feature-card, .why-item, .story-card, .couple-item, .form-content-center, .input-wrapper, .submit-btn.dark-btn, .active-story-card');
+      
+      // Функция для проверки видимости элемента
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+          rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+          rect.bottom >= 0
+        );
+      }
+      
+      // Функция для запуска анимации
+      function handleScrollAnimation() {
+        animatedElements.forEach(element => {
+          if (isElementInViewport(element)) {
+            element.classList.add('visible');
+          }
+        });
+        
+        // Прогресс скролла
+        const scrollProgress = document.querySelector('.progress-indicator');
+        if (scrollProgress) {
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight - windowHeight;
+          const scrolled = window.pageYOffset;
+          const progress = (scrolled / documentHeight) * 100;
+          scrollProgress.style.width = `${progress}%`;
+        }
+      }
+      
+      // Создаем индикатор прогресса
+      const progressIndicator = document.createElement('div');
+      progressIndicator.className = 'progress-indicator';
+      document.body.appendChild(progressIndicator);
+      
+      // Запускаем анимации при загрузке и скролле
+      window.addEventListener('load', handleScrollAnimation);
+      window.addEventListener('scroll', handleScrollAnimation);
+      
+      // Запускаем изначальные анимации для героя
+      setTimeout(() => {
+        const heroElements = document.querySelectorAll('.mobile-hero-logo, .mobile-hero-text, .mobile-hero-subtitle, .mobile-hero-map, .mobile-hero-cta');
+        heroElements.forEach((el, index) => {
+          setTimeout(() => {
+            el.style.opacity = '1';
+          }, index * 300);
+        });
+      }, 500);
+      
+      // Анимация для карты при наведении
+      const map = document.querySelector('.mobile-map-img');
+      if (map) {
+        map.addEventListener('mouseenter', () => {
+          map.style.transform = 'scale(1.05) rotate(1deg)';
+        });
+        
+        map.addEventListener('mouseleave', () => {
+          map.style.transform = 'scale(1) rotate(0deg)';
+        });
+      }
+      
+      // Интерактивная карусель
+      const carouselTrack = document.querySelector('.carousel-track');
+      if (carouselTrack) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        
+        // Мышь
+        carouselTrack.addEventListener('mousedown', (e) => {
+          isDown = true;
+          startX = e.pageX - carouselTrack.offsetLeft;
+          scrollLeft = carouselTrack.scrollLeft;
+        });
+        
+        carouselTrack.addEventListener('mouseleave', () => {
+          isDown = false;
+        });
+        
+        carouselTrack.addEventListener('mouseup', () => {
+          isDown = false;
+        });
+        
+        carouselTrack.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - carouselTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          carouselTrack.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Тач события
+        carouselTrack.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].pageX - carouselTrack.offsetLeft;
+          scrollLeft = carouselTrack.scrollLeft;
+        });
+        
+        carouselTrack.addEventListener('touchmove', (e) => {
+          const x = e.touches[0].pageX - carouselTrack.offsetLeft;
+          const walk = (x - startX) * 2;
+          carouselTrack.scrollLeft = scrollLeft - walk;
+        });
+      }
+      
+      // Анимация для кнопок карусели
+      const navButtons = document.querySelectorAll('.nav-btn');
+      navButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.style.transform = 'scale(0.9)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 200);
+        });
+      });
+      
+      // Анимация для элементов Why Us при клике
+      const whyItems = document.querySelectorAll('.why-item');
+      whyItems.forEach(item => {
+        item.addEventListener('click', function() {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 200);
+        });
+      });
+      
+      // Параллакс эффект для героя
+      window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const heroLogo = document.querySelector('.mobile-hero-logo');
+        const heroText = document.querySelector('.mobile-hero-text');
+        
+        if (heroLogo && heroText) {
+          const logoSpeed = 0.3;
+          const textSpeed = 0.5;
+          
+          heroLogo.style.transform = `translateY(${scrolled * logoSpeed}px) rotate(${scrolled * 0.05}deg)`;
+          heroText.style.transform = `translateY(${scrolled * textSpeed}px)`;
+        }
+      });
+    }
+    
+    // Отключаем GSAP на мобилках
+    if (window.innerWidth <= 768 && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.getAll().forEach(st => st.disable());
+      gsap.killTweensOf(".site-header");
+      gsap.killTweensOf(".slide-hands");
+      gsap.killTweensOf(".slide-lynx");
+      gsap.killTweensOf(".slide-map");
+    }
+  });
+  
+  // Плавный скролл для всех устройств
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
 </script>
 
 
