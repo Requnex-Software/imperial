@@ -2499,11 +2499,12 @@ body {
     margin-left: -60px;
     display: flex;
     height: 56px;
+    margin-top: -15px;
   }
 
   .lang-btn {
-    width: 56px;
-    height: 56px;
+    width: 62px;
+    height: 71px;
     border: 1px solid rgba(255,255,255,0.25);
     background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.05) 55%, rgba(0,0,0,0) 100%);
     font-size: 20px;
