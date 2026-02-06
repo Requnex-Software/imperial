@@ -569,81 +569,139 @@
 <script>
   gsap.registerPlugin(ScrollTrigger)
 
+  // Переменные (unchanged)
   const header = document.querySelector('.site-header')
   const headerBrand = document.querySelector('.header-brand')
   const headerRow = document.querySelector('.header-main-row')
   const isMobile = window.innerWidth <= 768
 
-  gsap.set(".site-header", { position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9999 })
+  // Фиксация хедера (unchanged)
+  gsap.set(".site-header", {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    zIndex: 9999
+  })
 
   if (!isMobile) {
-    // Initial positions
-    gsap.set(".slide-hands", { zIndex: 1, autoAlpha: 1 }) // Start low, will raise later
-    gsap.set(".slide-lynx", { zIndex: 2, autoAlpha: 1, x: "0%", filter: "brightness(1)" })
-    gsap.set(".slide-map", { zIndex: 3, autoAlpha: 1, x: "100%" })
-    gsap.set(".slide-hands .hero-bg-img", { y: "-100%", opacity: 0 })
+    // ===== 1. НАЧАЛЬНЫЕ ПОЗИЦИИ (SETUP) =====
+    
+    // Unchanged: Z-indexes for layering (Hands bottom, Lynx middle, Map top)
+    gsap.set(".slide-hands", { zIndex: 1, autoAlpha: 1 })
+    gsap.set(".slide-lynx", { zIndex: 2, autoAlpha: 1 }) // Starts bright and visible (no filter)
+    gsap.set(".slide-map", { zIndex: 3, autoAlpha: 1, x: "100%" }) // Off right, visible for overlay
 
+    // ХЕДЕР (unchanged)
+    header.classList.remove('header-centered-mode')
+
+    // РУКИ (unchanged)
+    gsap.set(".slide-hands .hero-bg-img", { y: "-100%", opacity: 0 })
+    
+    // РЫСЬ (unchanged - but note: opacity:100 is invalid; use 1. Removed redundant set)
+    gsap.set(".slide-lynx", { x: "0%", filter: 'brightness(1)' }) 
+
+    // КАРТА (Элементы внутри - unchanged)
     gsap.set(".slide-map .cat-logo", { scale: 0.8, opacity: 0 })
     gsap.set(".slide-map .map-cta-text, .slide-map .cta-btn", { y: 20, opacity: 0 })
 
-    // Pin the hero section until all animations are done
-    ScrollTrigger.create({
-      trigger: ".hero",
-      start: "top top",
-      end: "+=2000", // Enough space for two triggers
-      pin: true,
-      pinSpacing: true
-    })
-
-    // Track states
-    let hasFirstPlayed = false
-    let hasSecondPlayed = false
-
-    // Timeline 1: Lynx to Map (long and slow)
-    const tl1 = gsap.timeline({ paused: true })
-    tl1.to(headerBrand, { x: () => headerRow.getBoundingClientRect().left - headerBrand.getBoundingClientRect().left, duration: 5, ease: "power2.out" }, 0)
-    tl1.to(".slide-lynx", { x: "-15%", duration: 8, ease: "sine.out" }, 0)
-    tl1.to(".slide-lynx", { filter: "brightness(0.05)", duration: 8, ease: "sine.out" }, 0)
-    tl1.to(".slide-map", { x: "20%", duration: 8, ease: "sine.out" }, 0)
-    tl1.to(".slide-map .cat-logo", { scale: 1, opacity: 1, duration: 4 }, 2)
-    tl1.to(".slide-map .map-cta-text, .slide-map .cta-btn", { y: 0, opacity: 1, duration: 4, stagger: 0.5 }, 2.5)
-    tl1.to({}, { duration: 3 }) // Pause at end of first transition
-
-    // Timeline 2: Map to Hands (long and slow, with black bg move and hands z-index raise)
-    const tl2 = gsap.timeline({ paused: true })
-    tl2.to(".slide-hands", { zIndex: 4, duration: 0 }) // Raise hands z-index immediately to top
-    tl2.to(".slide-map .split-left", { x: "-100vw", opacity: 0, duration: 10, ease: "power3.inOut" }, 0) // Black bg (split-left) moves left
-    tl2.to(".slide-map .split-right", { x: "100vw", opacity: 0, duration: 10, ease: "power3.inOut" }, "<")
-    tl2.to(".slide-lynx", { autoAlpha: 0, duration: 10, ease: "power3.inOut" }, "<") // Ensure Lynx fully gone
-    tl2.to(".slide-hands .hero-bg-img", { y: "0%", opacity: 1, duration: 10, ease: "power3.out" }, "<")
-
-    // Detect first tiny scroll to play tl1
-    ScrollTrigger.create({
-      trigger: ".hero",
-      start: "top top",
-      end: "top -1", // Very sensitive — triggers on tiniest scroll
-      onUpdate: (self) => {
-        if (!hasFirstPlayed && self.direction === 1 && self.progress > 0) {
-          hasFirstPlayed = true
-          tl1.play() // Play only first animation slowly
+    // ===== 2. TIMELINE (СЦЕНАРИЙ) =====
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=1500", // CHANGE: Increased to 1500px for slower playback over more scroll distance (adjust higher for even slower)
+        scrub: 1,     // CHANGE: Increased to 1 for more inertia/smoothing (animation catches up over 1s, feels gradual on single scrolls)
+        pin: true,
+        anticipatePin: 1,
+        snap: {
+          snapTo: "labels", 
+          duration: { min: 0.5, max: 1.5 }, // CHANGE: Longer durations for softer, less abrupt snapping
+          delay: 0.1,                       // CHANGE: Slight delay for smoother start on snap
+          ease: "power2.inOut"              // CHANGE: Softer ease for snap transitions
         }
       }
     })
 
-    // After tl1 ends, enable detection for second tiny scroll to play tl2
-    tl1.eventCallback("onComplete", () => {
-      ScrollTrigger.create({
-        trigger: ".hero",
-        start: "top top",
-        end: "top -1", // Again, very sensitive
-        onUpdate: (self) => {
-          if (!hasSecondPlayed && self.direction === 1 && self.progress > 0) {
-            hasSecondPlayed = true
-            tl2.play() // Play only second animation slowly
-          }
-        }
-      })
-    })
+    // --- МЕТКА 1: НАЧАЛО (Рысь) ---
+    tl.addLabel("start")
+
+    // Header brand move left (CHANGE: Added soft ease for gradual start)
+    tl.to(headerBrand, {
+      x: () => {
+        const brandRect = headerBrand.getBoundingClientRect()
+        const rowRect = headerRow.getBoundingClientRect()
+        return rowRect.left - brandRect.left 
+      },
+      duration: 1,
+      ease: "power1.out" // CHANGE: Gentle acceleration for smoother feel
+    }, 0)
+
+    // Lynx moves a bit left (CHANGE: Soft ease)
+    tl.to(".slide-lynx", {
+      x: "-15%",
+      duration: 1,
+      ease: "power1.out"
+    }, 0)
+
+    // Darken Lynx partially (CHANGE: Soft ease)
+    tl.to(".slide-lynx", {
+      filter: "brightness(0.05)",
+      duration: 1,
+      ease: "power1.out"
+    }, 0) // Simultaneous with shift
+
+    // Map slides from right, ends at x:"20%" (CHANGE: Soft ease)
+    tl.to(".slide-map", {
+      x: "20%", 
+      duration: 1,
+      ease: "power1.out"
+    }, 0) // Simultaneous with Lynx changes
+
+    // Анимация ВНУТРИ карты (CHANGE: Slightly longer duration for smoother internal reveal)
+    tl.to(".slide-map .cat-logo", { scale: 1, opacity: 1, duration: 0.7 }, 0.5) // Extended for slow
+    tl.to([".slide-map .map-cta-text", ".slide-map .cta-btn"], { 
+      y: 0, opacity: 1, duration: 0.7, stagger: 0.2 // CHANGE: Longer + bigger stagger for gradual
+    }, 0.6)
+
+    // --- МЕТКА 2: КАРТА (Середина) ---
+    tl.addLabel("map")
+
+    // Пауза (CHANGE: Extended to 0.5 for more "hold" time at map state, feels less rushed)
+    tl.to({}, { duration: 0.5 })
+
+    // Split disappear - .split-left goes left (CHANGE: Soft ease)
+    tl.to(".slide-map .split-left", {
+      x: "-100vw",
+      opacity: 0,
+      duration: 1.5,
+      ease: "power2.inOut"
+    }, "+=0.1")
+// .split-right goes right (CHANGE: Soft ease - already power2)
+    tl.to(".slide-map .split-right", {
+      x: "100vw",
+      opacity: 0,
+      duration: 1.5,
+      ease: "power2.inOut"
+    }, "<")
+
+    // Fade out Lynx (CHANGE: Soft ease)
+    tl.to(".slide-lynx", {
+      autoAlpha: 0,
+      duration: 1.5,
+      ease: "power2.inOut"
+    }, "<")
+
+    // Hands appears from top (CHANGE: Soft ease for slow descent)
+    tl.to(".slide-hands .hero-bg-img", {
+      y: "0%",
+      opacity: 1,
+      duration: 1.5,
+      ease: "sine.out" // CHANGE: Sine for very smooth, slow start/end
+    }, "<") 
+
+    // --- МЕТКА 3: РУКИ (Финал) ---
+    tl.addLabel("hands")
   }
 </script>
 </div>
