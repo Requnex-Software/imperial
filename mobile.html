@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMPERIAL - Mobile</title>
+  <link rel="stylesheet" href="./mobile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="is-mobile">
+
+  <!-- ФОНОВАЯ ТЕКСТУРА (которая будет затухать) -->
+  <div class="mob-bg-layer">
+    <img src="/bg-emerald.jpg" alt="Background" class="mob-bg-texture">
+    <div class="mob-dimmer" id="mob-dimmer"></div>
+  </div>
+
+  <!-- ШАПКА: Линии + Название (без рамки) + RU -->
+  <header class="mob-header" id="mobile-header">
+    <div class="mob-header-line"></div> <!-- Верхняя линия -->
+    
+    <div class="mob-header-row">
+        <!-- Логотип картинкой -->
+        <div class="mob-logo-wrap">
+            <img src="/logo-imperial.png" alt="IMPERIAL" class="mob-logo-img">
+        </div>
+        
+        <!-- Кнопка RU -->
+        <div class="mob-ru-btn-exact">RU</div>
+    </div>
+    
+    <div class="mob-header-line"></div> <!-- Нижняя линия -->
+    
+    <p class="mob-tagline-exact">Реальные люди. Настоящие истории</p>
+</header>
+
+  <div class="mob-scroll-container">
+    <section class="mob-section">
+      <!-- Твой композитный заголовок (Рысь + Текст) -->
+      <div class="mob-hero-content" id="hero-content">
+        <img src="/mobile-title-hero.png" alt="Title" class="mob-composite-title">
+        
+        <!-- Девушка с рысью внизу (уменьшенная) -->
+        <div class="mob-girl-bottom-wrap">
+          <img src="/2slide-lynx.png" alt="Girl" class="mob-girl-img-small">
+        </div>
+      </div>
+    </section>
+
+    <!-- ЭКРАН 2: КАРТА (без изменений) -->
+    <!-- ЭКРАН 2: КАРТА -->
+<section class="mob-section">
+  <div class="mob-map-content" id="map-content">
+    
+    <!-- 1. Тот же заголовок, что и на первом экране -->
+    <img src="/mobile-title-hero.png" alt="Title" class="mob-title-map">
+
+    <!-- 2. Текст под заголовком -->
+    <p class="mob-map-subtext">в любой точке мира<br>регистрация за 10 минут</p>
+
+    <!-- 3. Кнопка ТЕПЕРЬ КАРТИНКОЙ -->
+    <div class="mob-btn-img-wrap">
+      <img src="/btn-submit.png" alt="Оставить заявку" class="mob-submit-img">
+    </div>
+
+    <!-- 4. Карта, прижатая к самому дну -->
+    <div class="mob-map-bottom-wrap">
+      <img src="/map.png" alt="World Map" class="mob-map-img-bottom">
+      <!-- Если нужны пины с парами, они накладываются поверх этой картинки в дизайне -->
+    </div>
+
+  </div>
+</section>
+  <!-- ЭКРАН 3: РУКИ И ПУТЬ (Теперь это обычный поток) -->
+<section class="mob-section-flow mob-section-hands">
+  <!-- Руки (без изменений) -->
+  <div class="mob-hands-top">
+    <img src="/handhero.png" alt="Hands" class="mob-hands-img">
+  </div>
+
+  <!-- Текст (без изменений) -->
+  <div class="mob-hands-text-composite">
+    <img src="/text-white.png" alt="Ваш путь" class="mob-text-base">
+    <img src="/text-gold.png" alt="отношениям" class="mob-text-overlay">
+  </div>
+</section>
+<!-- ЭКРАН 4: КАРТОЧКИ (Скролл внутри) -->
+<section class="mob-section-flow mob-section-features">
+  <div class="mob-features-scroll">
+    
+     <!-- КАРТОЧКА 1: ГЛОБУС -->
+    <div class="mob-card mob-card-1">
+      <div class="mob-card-text-wrap" style="width: 232px;">
+        К нам присоединяются женщины со всего мира: Латинская Америка, Европа и Азия
+      </div>
+      <div class="mob-globe-wrapper">
+        <img src="/card 1-2.png" alt="Globe" class="mob-globe-img">
+        <!-- Пины-пользователи -->
+        <div class="mob-pin pin-left"><img src="/user1.png" alt=""></div>
+        <div class="mob-pin pin-right"><img src="/user2.png" alt=""></div>
+      </div>
+    </div>
+
+    <!-- Карточка 2: Пара -->
+    <div class="mob-feature-card">
+      <img src="/card 2-2.png" class="mob-card-bg">
+      <p class="mob-card-text top-left">Нам доверяют те, кто знает цену качеству —<br>лидеры, бизнесмены и звезды</p>
+    </div>
+
+    <!-- Карточка 3: Беременная -->
+    <div class="mob-feature-card">
+      <img src="/card 3-2.png" class="mob-card-bg">
+      <p class="mob-card-text bottom-left">Подарили миру<br>211 малышей</p>
+    </div>
+
+    <!-- Карточка 4: Бесплатно -->
+    <div class="mob-feature-card center-text">
+      <img src="/card 4-2.png" class="mob-card-bg">
+      <div class="mob-card-overlay">
+        <p>Участие в нашем клубе</p>
+        <div class="mob-free-badge">абсолютно бесплатно</div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+  <script src="./mobile-motion.js"></script>
+</body>
+</html>

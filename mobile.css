@@ -1,0 +1,692 @@
+/* =========================================
+   БАЗОВЫЕ НАСТРОЙКИ
+   ========================================= */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body.is-mobile {
+    background: #041E1A;
+    font-family: 'Montserrat', sans-serif;
+    overflow-y: auto; /* Блокируем системный скролл для работы Snap-эффекта */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Изоляция контента */
+.is-mobile .desktop-wrapper { display: none !important; }
+.is-mobile .mobile-wrapper { display: block !important; }
+
+/* =========================================
+   ФОНОВЫЙ СЛОЙ (ТЕКСТУРА + ЗАТЕМНЕНИЕ)
+   ========================================= */
+.mob-bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
+.mob-bg-texture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Это свойство прижмет верхнюю часть картинки к самому верху экрана */
+    object-position: top center; 
+}
+
+.mob-dimmer {
+    position: absolute;
+    inset: 0;
+    background: #041E1A;
+    opacity: 0; /* Управляется через mobile-motion.js */
+    z-index: 2;
+}
+
+
+
+/* =========================================
+   СКРОЛЛ КОНТЕЙНЕР (SNAP EFFECT)
+   ========================================= */
+.mob-scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y proximity;
+    position: relative;
+    z-index: 20;
+}
+
+ /* Базовые секции (первые две с анимацией) */
+.mob-section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+}
+
+/* Секции, которые идут ПОТОМ (Руки, Карточки и т.д.) */
+.mob-section-flow {
+    height: auto !important; /* Разрешаем любую высоту */
+    min-height: auto !important;
+    scroll-snap-align: none !important; /* Отключаем прилипание */
+    scroll-snap-stop: normal !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #041E1A;
+    position: relative;
+    z-index: 30;
+    padding-bottom: 20px;
+}
+
+/* =========================================
+   ЭКРАН 1: ГЕРОЙ (ТЕКСТ + ДЕВУШКА)
+   ========================================= */
+.mob-hero-content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    padding-top: 160px; /* Отступ под шапку */
+}
+
+/* Твой новый композитный заголовок (Рысь + Текст) */
+.mob-composite-title {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Девушка внизу */
+.mob-girl-bottom-wrap {
+    margin-top: auto; /* Прижимает к низу */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.mob-girl-img-small {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   ЭКРАН 2: КАРТА
+   ========================================= */
+.mob-map-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Проявляется через JS */
+}
+
+.mob-map-text {
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.mob-glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 20px 50px;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.mob-map-img {
+    width: 120%;
+    opacity: 0.8;
+}
+/* =========================================
+   ШАПКА (PIXEL PERFECT) — ПОЛНОСТЬЮ ПРОЗРАЧНАЯ
+   ========================================= */
+.mob-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 20px 0;
+    pointer-events: none;
+    /* Убираем любой фон и фильтры */
+    background: transparent !important;
+    backdrop-filter: none !important;
+}
+
+/* Золотые горизонтальные линии */
+.mob-header-line {
+    height: 1px;
+    background-color: rgba(197, 160, 103, 0.5); /* Делаем линии чуть мягче */
+    width: 100%;
+}
+
+.mob-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 54px;
+    padding: 0;
+    background: transparent !important;
+}
+
+.mob-logo-wrap {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    pointer-events: auto;
+}
+
+.mob-logo-img {
+    height: 20px;
+    width: auto;
+}
+
+/* Кнопка RU — теперь полностью прозрачная */
+.mob-ru-btn-exact {
+    width: 56px; /* Фиксированная ширина */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    
+    /* Вертикальная линия слева как на фото */
+    border-left: 1px solid rgba(197, 160, 103, 0.35); 
+    
+    /* ЭФФЕКТ СТЕКЛА И МЕТАЛЛА */
+    /* 1. Точный блюр из твоей Фигмы */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Для поддержки Safari/iOS */
+    
+    /* 2. Градиент блика (свет падает сверху слева) */
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.15) 0%, 
+        rgba(255, 255, 255, 0.05) 40%, 
+        rgba(0, 0, 0, 0.05) 100%
+    );
+
+    /* 3. Внутреннее свечение по краям для объема */
+    box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.2);
+
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* Фикс для родительского контейнера, чтобы кнопка "встала" по высоте */
+.mob-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Важно: растягивает кнопку до золотых линий */
+    height: 52px; /* Подбери высоту под свой макет */
+    padding: 0;
+}
+/* Добавляем легкое свечение при наведении (опционально) */
+.mob-ru-btn-exact:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Надпись под шапкой */
+.mob-tagline-exact {
+    color: #FFFFFF;
+    font-size: 13px;
+    padding-top: 12px;
+    padding-left: 5px;
+    font-weight: 400;
+    text-align: left;
+    background: transparent !important;
+}
+/* 1. Контейнер, который обрежет лишнее */
+.mob-bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: #041E1A; /* Фоновый цвет на всякий случай */
+    overflow: hidden;    /* Важно! Чтобы картинка не создала скролл */
+}
+
+/* 2. Сама картинка с твоими параметрами */
+.mob-bg-texture {
+    position: absolute;
+    /* Данные из твоего скриншота: */
+    width: 1589px !important;
+    height: 1578px !important;
+    top: -13px !important;
+    left: -633px !important;
+    
+    /* Отключаем стандартное растягивание, чтобы пиксели были точными */
+    object-fit: none !important; 
+    max-width: none !important; 
+}
+/* 1. Контейнер первого экрана делаем относительным, чтобы координаты считались от него */
+.mob-hero-content {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden; /* Чтобы обрезанные части девушки не создавали горизонтальный скролл */
+    padding-top: 0; /* Координаты Top заменят падинг */
+}
+
+/* 2. Позиционируем заголовок (если он не в общем файле, оставь его выше) */
+.mob-composite-title {
+    position: relative;
+    z-index: 10;
+    margin-top: 160px; /* Оставляем как было или подбери по макету */
+}
+
+/* 3. ДЕВУШКА — ТОЧНЫЕ ПАРАМЕТРЫ ИЗ ФИГМЫ */
+.mob-girl-img-small {
+    position: absolute !important;
+    
+    /* Данные из твоего скриншота Layout: */
+    width: 520.57px !important;
+    height: 488px !important;
+    top: 388px !important;
+    left: -73.07px !important;
+    
+    /* Убираем лишние свойства, чтобы не мешали размерам */
+    max-width: none !important;
+    margin: 0 !important;
+    object-fit: cover;
+    display: block;
+}
+
+/* Очищаем обертку, если она мешает позиционированию */
+.mob-girl-bottom-wrap {
+    display: block;
+    margin: 0;
+    width: 0;
+    height: 0;
+}
+/* =========================================
+   ЭКРАН 2: КАРТА (PIXEL PERFECT)
+   ========================================= */
+
+/* Стили для второй секции (Карта) */
+.mob-map-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding-top: 140px; /* Отступ, чтобы быть под шапкой */
+    opacity: 0; /* Для анимации появления */
+}
+
+/* Заголовок во второй секции */
+.mob-title-map {
+    width: 250px; /* Чуть меньше, чем на первом экране, если нужно */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Подзаголовок "в любой точке мира" */
+.mob-map-subtext {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+/* Контейнер кнопки-картинки */
+.mob-btn-img-wrap {
+    z-index: 10;
+}
+
+.mob-submit-img {
+    width: 210px; /* Размер как в твоей Фигме */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.mob-submit-img:active {
+    transform: scale(0.95); /* Эффект нажатия */
+}
+
+/* Контейнер КАРТЫ на дне */
+.mob-map-bottom-wrap {
+    margin-top: auto; /* ГЛАВНОЕ: выталкивает блок вниз */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden; /* Чтобы карта не создавала скролл, если она шире экрана */
+}
+
+.mob-map-img-bottom {
+    width: 100%; /* Карта должна быть шире экрана, как на скриншоте */
+    max-width: none;
+    height: auto;
+    display: block;
+    opacity: 0.9;
+    /* Сдвигаем немного вниз, чтобы красиво "обрезалась" краем экрана */
+    margin-bottom: 85px; 
+}
+/* =========================================
+   ЭКРАН 3: РУКИ (ВАШ ПУТЬ)
+   ========================================= */
+
+.mob-section-hands {
+    background-color: #041E1A; /* Закрашиваем фон, чтобы перекрыть фиксированную рысь */
+    min-height: 100vh;
+    height: auto !important;
+    position: relative;
+    z-index: 30;
+    scroll-snap-align: start; /* Это последняя точка прилипания */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px; /* Минимум места сверху */
+}
+
+/* Блок с руками (Верхняя часть) */
+.mob-hands-top {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+    margin-bottom: -20px;
+    
+    /* ДОБАВЬ ЭТУ СТРОКУ: */
+    margin-top: -100px; /* Это поднимет руки (и текст под ними) выше */
+}
+
+.mob-hands-img {
+    width: 90%;
+    max-width: 380px;
+    height: auto;
+}
+
+/* Прижимаем текст к рукам */
+.mob-hands-text-composite {
+    position: relative;
+    margin-top: -50px; /* Наезжаем на руки как в Фигме */
+    width: 320px;
+    z-index: 10;
+}
+
+/* 4. СЕКЦИЯ КАРТОЧЕК (Плотный поток) */
+.mob-section-features {
+    background-color: #041E1A;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 0 20px 40px; /* Отступы только по бокам и снизу */
+    
+    /* ГЛАВНОЕ: Отрицательный маржин тянет карточки вверх к тексту */
+    margin-top: 0 !important; /* Убери отрицательный маржин, если он создает наложение, или оставь -20px для плотности */
+    padding-top: 0 !important;
+    
+    scroll-snap-align: none !important; /* Свободный скролл */
+    z-index: 35;
+}
+
+
+.mob-feature-card {
+    margin-bottom: 12px; /* Минимальное расстояние между карточками */
+    height: 340px;
+}
+
+/* Контейнер для текста (Нижняя часть) */
+.mob-hands-text-composite {
+    position: relative;
+    z-index: 10; /* Текст ПОД руками */
+    width: 90%; /* Текст шире, почти на весь экран */
+    max-width: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0; /* Убираем лишние отступы */
+    
+    /* Анимация появления */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* Белый текст (Основа) */
+.mob-text-base {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Золотой текст (Накладывается сверху на белый) */
+.mob-text-overlay {
+    position: absolute;
+    top: 38%; /* Подгоняем под центр белого текста */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 105%;
+    height: auto;
+}
+
+/* Класс для активации анимации */
+.mob-hands-text-composite.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.mob-features-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+/* Карточка */
+.mob-feature-card {
+    position: relative;
+    width: 100%;
+    height: 360px; /* Фиксированная высота как на скрине */
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.mob-card-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+/* Текст на карточке */
+.mob-card-text {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 20px;
+    z-index: 2;
+}
+
+.top-left { top: 0; left: 0; }
+.bottom-left { bottom: 0; left: 0; }
+
+/* Центрированная карточка (Бесплатно) */
+.center-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.mob-card-overlay {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mob-free-badge {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(4, 30, 26, 0.8);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    font-size: 12px;
+    text-transform: lowercase;
+}
+/* Добавь это в конец mobile.css */
+
+.mob-header {
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Плавность исчезновения */
+}
+
+.mob-header.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px); /* Легкий уход вверх */
+}
+.mob-hands-top {
+    width: 100%;
+    margin-top: -20px; /* Поднимаем руки ближе к карте */
+    display: flex;
+    justify-content: center;
+}
+/* ЭТО РЕШИТ ПРОБЛЕМУ СКРОЛЛА */
+.mob-section-hands {
+    /* Обязательно даем минимальную высоту экрана */
+    min-height: 100vh;
+    height: auto !important;         /* Убирает фиксированную высоту */
+    min-height: auto !important;     /* Убирает растягивание на весь экран */
+    justify-content: flex-start;     /* Прижимает контент к верху, а не к центру */
+    scroll-snap-align: none !important; /* Чтобы не было "прыжка" при докрутке */
+    
+    /* ГЛАВНОЕ: Говорим скроллу прилипать к началу этой секции */
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    
+    /* Настройки отображения */
+    background-color: #041E1A;
+    position: relative;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+/* Базовый стиль карточек */
+.mob-card {
+    position: relative;
+    width: 343px; /* Стандартная ширина из макета */
+    height: 380px; /* Отрегулируй общую высоту под контент */
+    background-color: #1D3531; /* Точный цвет фона из Фигмы */
+    margin: 0 auto 16px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+/* ТИПОГРАФИКА (Pixel Perfect) */
+.mob-card-text-wrap {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 10;
+    
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 24px; /* 100% как в макете */
+    letter-spacing: -0.06em; /* -6% из макета */
+    color: #FFFFFF;
+    text-align: left;
+}
+
+/* --- СПЕЦИФИКА КАРТОЧКИ 1 --- */
+.mob-globe-wrapper {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+}
+
+.mob-globe-img {
+    width: 110%; /* Глобус чуть выходит за края */
+    object-fit: contain;
+}
+
+.mob-pin {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1.5px solid #FFFFFF;
+    overflow: hidden;
+    background: #1D3531;
+}
+
+.mob-pin img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Позиции пинов на глобусе */
+.pin-left { bottom: 120px; left: 60px; }
+.pin-right { bottom: 80px; right: 70px; }
+
+
+/* --- СПЕЦИФИКА КАРТОЧКИ 2 --- */
+.mob-couple-overlay {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 187px; /* Из твоего скриншота Layout */
+    height: 261px; /* Из твоего скриншота Layout */
+}
+
+.mob-couple-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ЭФФЕКТ ТУМАНА / ГРАДИЕНТА (Pixel Perfect) */
+/* Используем параметры из твоего скриншота градиентов */
+.mob-card-fog {
+    position: absolute;
+    inset: 0;
+    /* Создаем мягкое растворение картинки в фон карточки */
+    background: linear-gradient(to top, transparent 0%, #1D3531 95%),
+                linear-gradient(to left, transparent 0%, #1D3531 95%);
+    z-index: 2;
+}
+
+/* Дополнительное мягкое размытие по краям картинки */
+.mob-couple-img {
+    mask-image: linear-gradient(to top, black 70%, transparent 100%),
+                linear-gradient(to left, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%),
+                        -webkit-linear-gradient(to left, black 70%, transparent 100%);
+}

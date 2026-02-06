@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMPERIAL - Реальные люди. Настоящие истории</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/desktop-CukzgWQN.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/desktop-C07ICB9S.css">
+</head>
+<body>
+  <div class="desktop-wrapper">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+
+      <!-- Main Bar with Borders -->
+      <div class="header-main-row">
+        <!-- Left: Brand -->
+        <div class="header-left">
+          <div class="header-brand">
+            <img src="./logo-header.png" alt="IMPERIAL" class="logo-img">
+            <p class="header-tagline">Реальные люди. Настоящие истории</p>
+          </div>
+        </div>
+
+
+        <!-- Right: Lang + Social -->
+        <div class="header-right">
+          <!-- Language Switcher -->
+          <div class="lang-switch-container">
+            <div class="lang-btn" id="lang-btn">RU</div>
+            <div class="lang-dropdown" id="lang-dropdown">
+              <div class="lang-item" data-lang="ru">Russian</div>
+              <div class="lang-item active" data-lang="en">English</div>
+              <div class="lang-item" data-lang="de">German</div>
+              <div class="lang-item" data-lang="pt-br">Português</div>
+              <div class="lang-item" data-lang="th">Thai</div>
+              <div class="lang-item" data-lang="uk">Ukrainian</div>
+            </div>
+          </div>
+
+          <!-- Social Icons -->
+          <div class="header-socials">
+            <a href="https://instagram.com" class="social-icon"><i data-lucide="instagram"></i></a>
+            <a href="https://facebook.com" class="social-icon"><i data-lucide="facebook"></i></a>
+            <a href="https://telegram.org" class="social-icon"><img src="./telegram 1.png" alt="Telegram"></i></a>
+            <a href="https://whatsapp.com" class="social-icon"><img src="./whatsapp.png" alt="WhatsApp"></i></a>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero-slider">
+    <!-- Desktop Slides (Hidden on Mobile) -->
+    <div class="desktop-hero">
+      <!-- Slide 1: Hands (Existing) -->
+      <div class="hero-slide slide-hands">
+        <img src="./handhero.png" alt="Couple Hands" class="hero-bg-img">
+        
+        <div class="container">
+          <div class="hands-content-wrapper">
+            <img src="./full-text.png" alt="Ваш путь к отношениям" class="text-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Woman with Lynx -->
+      <div class="hero-slide slide-lynx ">
+        <!-- Main Lynx Image -->
+        <img src="./2slide-lynx.png" alt="Woman with Lynx" class="lynx-main-img">
+        <!-- Right Shtorka -->
+        <img src="./slide2-shtorka.png" alt="" class="lynx-shtorka-right">
+        <img src="./shtorkai2.png" alt="" class="lynx-shtorka-rights">
+
+        <div class="lynx-container">
+          <div class="lynx-content">
+            <div class="cat-logo-wrapper">
+              <img src="./lynx.png" alt="Emblem" class="cat-logo">
+            </div>
+            <div class="hero-main-text">
+              <span class="text-line-1">НАЙДЁМ ВАМ</span>
+              <span class="text-line-2">МУЖЧИНУ</span>
+              <span class="text-script">Мечты</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Map Split -->
+      <div class="hero-slide slide-map ">
+        <!-- Left Side: Text (Black Background) -->
+        <div class="split-left">
+          <div class="split-content-wrapper">
+            <div class="cat-logo-wrapper">
+              <img src="./lynx.png" alt="Emblem" class="cat-logo">
+            </div>
+            <div class="hero-main-text">
+              <span class="text-line-1">НАЙДЁМ ВАМ</span>
+              <span class="text-line-2">МУЖЧИНУ</span>
+              <span class="text-script">Мечты</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Map & CTA (Green Background) -->
+        <div class="split-right">
+          <!-- Map Background Layer -->
+          <div class="map-bg-layer">
+            <img src="./map.png" alt="World Map" class="map-img-absolute">
+          </div>
+
+          <!-- Content Overlay -->
+          <div class="map-cta-container">
+            <div class="map-text-group">
+              <div class="map-cta-text">в любой точке мира</div>
+              <div class="map-cta-text">регистрация за 10 минут</div>
+            </div>
+
+            <div class="map-btn-wrapper">
+              <button class="submit-btn dark-btn cta-btn"
+                onclick="document.getElementById('lead-form').scrollIntoView({behavior: 'smooth'})">Оставить
+                заявку</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Hero -->
+    <section class="mobile-hero-section">
+      
+      <div class="mobile-bg-container">
+        <img src="./2slide-lynx.png" alt="Woman with Lynx" class="mobile-hero-img">
+        <div class="mobile-dim-layer"></div>
+      </div>
+
+      <div class="mobile-hero-content">
+        <div class="mobile-icon-wrapper">
+          <img src="./lynx.png" alt="Lynx Icon" class="mobile-lynx-icon">
+        </div>
+
+        <h1 class="mobile-main-title">
+          НАЙДЁМ ВАМ<br>
+          МУЖЧИНУ<br>
+          <span class="script-font gold-text">Мечты</span>
+        </h1>
+      </div>
+
+    </section>
+
+    <!-- Mobile Hands Section -->
+    <div class="mobile-hands-section">
+      <div class="container">
+        <div class="mobile-hands-image">
+          <img src="./handhero.png" alt="Couple Hands" class="mobile-hands-img">
+        </div>
+        <div class="mobile-hands-text">
+          <h2 class="mobile-hands-title">
+            ВАШ ПУТЬ К<br>
+            <span class="mobile-hands-script">отношениям</span><br>
+            НАЧИНАЕТСЯ С НАС
+          </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="container features-grid">
+      <!-- Card 1: Globe -->
+      <div class="feature-card card-globe">
+        <div class="card-text-overlay top-left">
+          <p data-key="card_globe">К нам присоединяются женщины со всего мира:<br>Латинская Америка, Европа и Азия</p>
+        </div>
+        <img src="./card 1-2.png" alt="Card 1" class="card-full-img">
+      </div>
+
+      <!-- Card 2: Couple -->
+      <div class="feature-card card-couple-bouquet">
+        <div class="card-text-overlay top-left">
+          <p data-key="card_couple">Нам доверяют те, кто знает цену<br>качеству — лидеры, бизнесмены<br>и звезды</p>
+        </div>
+        <img src="./card 2-2.png" alt="Card 2" class="card-full-img">
+      </div>
+
+      <!-- Card 3: Pregnant -->
+      <div class="feature-card card-pregnant">
+        <div class="card-text-overlay bottom-left">
+          <p data-key="card_pregnant">Подарили миру<br>211 малышей</p>
+        </div>
+        <img src="./card 3-2.png" alt="Card 3" class="card-full-img">
+      </div>
+
+      <!-- Card 4: Free (Center) -->
+      <div class="feature-card card-free">
+        <div class="card-text-overlay centered">
+          <p data-key="card_free_title">Участие в нашем клубе</p>
+          <div class="free-badge" data-key="card_free_badge">абсолютно бесплатно</div>
+        </div>
+        <img src="./card 4-2.png" alt="Card 4" class="card-full-img">
+      </div>
+
+      <!-- Card 5: Ring -->
+      <div class="feature-card card-ring">
+        <div class="card-text-overlay top-left">
+          <p data-key="card_ring">Мы помогли создать<br>свыше 1 257 пар</p>
+        </div>
+        <img src="./card 5-2.png" alt="Card 5" class="card-full-img">
+        <img src="./20251031_1331_Emerald Elegance Displayed_remix_01k8x0g44ffv3bw5bw4ks4p9s5 1.png" alt="Ring Overlay"
+          class="ring-overlay">
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title centered">
+        ПОЧЕМУ НАС <span class="script-font gold-text">Выбирают</span><br>
+        ТЕ, КТО ДОВЕРЯЕТ ТОЛЬКО<br>
+        ПРОФЕССИОНАЛАМ
+      </h2>
+      <div class="why-us-content">
+        <div class="why-us-stack">
+          <!-- Center Image -->
+          <img src="./freepik__enhance__49670 1.png" alt="Romantic Couple" class="why-us-center-img">
+
+          <!-- Left Column -->
+          <div class="why-col left-col">
+            <div class="why-item">
+              <img src="./icon-headset.png" alt="Assistant" class="why-icon">
+              <div class="why-text">
+                <h3 data-key="why_assistant_title">Ассистент</h3>
+                <p data-key="why_assistant_desc">Персональный ассистент, который ответит в течение 10 минут</p>
+              </div>
+            </div>
+            <div class="why-divider"></div>
+
+            <div class="why-item">
+              <img src="./icon-clock.png" alt="Clock" class="why-icon">
+              <div class="why-text">
+                <h3 data-key="why_registration_title">Регистрация 10 минут</h3>
+                <p data-key="why_registration_desc">Быстрая регистрация — займет всего 10 минут</p>
+              </div>
+            </div>
+            <div class="why-divider"></div>
+
+            <div class="why-item">
+              <img src="./icon-calendar.png" alt="Calendar" class="why-icon">
+              <div class="why-text">
+                <h3 data-key="why_60days_title">60 дней</h3>
+                <p data-key="why_60days_desc">Прекратите участие в клубе через 60 дней при необходимости</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="why-col right-col">
+            <div class="why-item">
+              <img src="./icon-shield.png" alt="Shield" class="why-icon">
+              <div class="why-text">
+                <h3 data-key="why_privacy_title">Конфиденциальность</h3>
+                <p data-key="why_privacy_desc">Конфиденциальность и защита данных по стандартам GDPR</p>
+              </div>
+            </div>
+            <div class="why-divider"></div>
+
+            <div class="why-item">
+              <img src="./icon-person.png" alt="Psychologist" class="why-icon">
+              <div class="why-text">
+                <h3 data-key="why_psychologist_title">Психолог</h3>
+                <p data-key="why_psychologist_desc">Точный выбор мужчин благодаря психологам в нашей команде</p>
+              </div>
+            </div>
+            <div class="why-divider"></div>
+
+            <div class="why-item">
+              <img src="./icon-bolt.png" alt="Bolt" class="why-icon">
+              <div class="why-text">
+                <h3 data-key="why_men_title">2000+ мужчин</h3>
+                <p data-key="why_men_desc">У нас есть более 2x тысяч успешных мужчин по всему миру</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Stories Carousel -->
+  <section class="stories">
+    <div class="container">
+      <h2 class="section-title centered">
+        РЕАЛЬНЫЕ ИСТОРИИ<br>
+        НАСТОЯЩЕЙ <span class="script-font gold-text">Любви</span>
+      </h2>
+
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <!-- Card 1 (Active/Large) -->
+          <div class="story-card active-card">
+            <div class="story-image-wrapper">
+              <img src="./irina.png" alt="Ирина Петрова" class="story-img"> <!-- Placeholder -->
+              <div class="story-overlay">
+                <div class="story-rating"><i data-lucide="star" class="icon-star"></i> 5</div>
+                <div class="play-btn-large"><i data-lucide="play" class="icon-play-fill"></i></div>
+                <div class="story-info">
+                  <span class="story-name">Ирина Петрова <img src="./verif.png" alt="Verified"
+                      class="icon-verify-img"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="story-card">
+            <div class="story-image-wrapper">
+              <img src="./maria.png" alt="Мария" class="story-img"> <!-- Placeholder -->
+              <div class="story-overlay">
+                <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
+                <div class="story-info">
+                  <span class="story-name">Мария</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="story-card">
+            <div class="story-image-wrapper">
+              <img src="./anna.png" alt="Анна" class="story-img"> <!-- Placeholder -->
+              <div class="story-overlay">
+                <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
+                <div class="story-info">
+                  <span class="story-name">Анна</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="story-card">
+            <div class="story-image-wrapper">
+              <img src="./NASTYA.png" alt="Анастасия" class="story-img"> <!-- Placeholder -->
+              <div class="story-overlay">
+                <div class="play-btn-small"><i data-lucide="play" class="icon-play-fill"></i></div>
+                <div class="story-info">
+                  <span class="story-name">Анастасия</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="carousel-nav">
+          <button class="nav-btn next"><i data-lucide="arrow-right"></i></button>
+          <button class="nav-btn prev"><i data-lucide="arrow-left"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories Detail -->
+  <section class="stories-detail">
+    <div class="container detail-container">
+
+      <!-- Left Column: Active Card & List -->
+      <div class="detail-left-col">
+        <!-- Active Green Card -->
+        <div class="active-story-card">
+          <div class="active-card-header">
+            <h3>ОЛЬГА И ИВАН</h3>
+            <button class="expand-btn"><i data-lucide="arrow-up"></i></button>
+          </div>
+          <div class="active-card-img-wrapper">
+            <img src="./olga-ivan.jpg" alt="Ольга и Иван" class="active-card-img"> <!-- Placeholder -->
+          </div>
+          <div class="active-card-text">
+            <p>Мы хотим выразить огромную благодарность всему коллективу агентства! К вам мы обратились уже не веря, что
+              в наше время можно найти серьезные отношения...</p>
+          </div>
+        </div>
+
+        <!-- Accordion List -->
+        <div class="couple-names-list">
+          <div class="couple-item">
+            <h3>ТАТЬЯНА И АНДРЕЙ</h3>
+            <div class="couple-right">
+              <img src="./thumb-tatiana.jpg" alt="" class="couple-thumb"> <!-- Placeholder -->
+              <i data-lucide="arrow-down" class="arrow-icon"></i>
+            </div>
+          </div>
+          <div class="couple-item">
+            <h3>ВЕРОНИКА И ОЛЕГ</h3>
+            <div class="couple-right">
+              <i data-lucide="arrow-down" class="arrow-icon"></i>
+            </div>
+          </div>
+          <div class="couple-item">
+            <h3>МАРИЯ И АЛЕКСЕЙ</h3>
+            <div class="couple-right">
+              <i data-lucide="arrow-down" class="arrow-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Flower Decor -->
+      <div class="detail-right-col">
+        <div class="decor-flower-wrapper">
+          <img src="./flower-decor.png" alt="Flower Decor" class="flower-img"> <!-- Placeholder -->
+          <!-- Text is likely part of the image in design, but we can overlay if needed -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Full Width Button -->
+    <div class="container full-width-btn-container">
+      <button class="read-more-full-btn">
+        Читать историю полностью <i data-lucide="arrow-up-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section class="lead-form" id="lead-form">
+    <div class="container form-container">
+
+      <!-- Center Content -->
+      <div class="form-content-center">
+        <p class="form-subtitle centered">Сделайте первый шаг к отношениям, о которых мечтали</p>
+        <h2 class="form-title centered">ОСТАВЬТЕ ЗАЯВКУ</h2>
+
+        <form class="application-form centered-form">
+          <!-- Name Input with Floating Label -->
+          <div class="input-wrapper">
+            <input type="text" id="form-name" class="form-input dark-input floating-input" placeholder=" " required>
+            <label for="form-name" class="floating-label">Имя</label>
+            <!-- Error message example (hidden by default) -->
+            <div class="error-message">Пожалуйста введите свое имя</div>
+            <i data-lucide="circle-alert" class="error-icon"></i>
+          </div>
+
+          <!-- Phone Input with Dropdown -->
+          <div class="input-wrapper phone-wrapper">
+            <div class="phone-prefix-container" id="phone-prefix-btn">
+              <span class="prefix-val">+1</span>
+              <!-- Dropdown List -->
+              <div class="prefix-dropdown" id="prefix-dropdown">
+                <div class="country-list" id="country-list">
+                  <!-- Countries will be populated by JS -->
+                </div>
+              </div>
+            </div>
+            <input type="tel" class="form-input dark-input phone-input-field" placeholder=" ">
+          </div>
+
+          <button type="submit" class="submit-btn dark-btn">Отправить</button>
+        </form>
+      </div>
+
+      <!-- Decorative Images (Absolute) -->
+      <img src="./woman-lynx.jpg" alt="" class="decor-woman-lynx"> <!-- Placeholder for right image -->
+
+    </div>
+    <!-- Ribbon moved outside container to section level -->
+    <img src="./ribbon-green.png" alt="" class="decor-ribbon">
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+
+      <!-- Top Row -->
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <img src="./logo-gold.png" alt="IMPERIAL" class="footer-logo-img"> <!-- Placeholder -->
+            <!-- Removed text span as requested -->
+          </div>
+          <p class="footer-tagline">Реальные люди. Настоящие истории</p>
+          <div class="footer-copyright-block">
+            <p>© 2026 IMPERIAL</p>
+            <p>All rights reserved</p>
+          </div>
+        </div>
+
+        <div class="footer-contact">
+          <div class="social-links-squares">
+            <a href="#" class="social-sq"><i data-lucide="instagram"></i></a>
+            <a href="#" class="social-sq"><img src="./telegram 1.png" alt="Telegram"></a> <!-- Telegram icon -->
+            <a href="#" class="social-sq"><img src="./whatsapp.png" alt="WhatsApp"></a> <!-- WhatsApp icon -->
+          </div>
+          <a href="mailto:info@imperial.com" class="footer-email">info@imperial.com</a>
+        </div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <a href="#">Политика конфиденциальности</a>
+          <span class="separator">|</span>
+          <a href="#">Правила использования сервиса</a>
+        </div>
+        <div class="footer-credits">
+          Design by Alice K & ITmaestro <br />
+          Developed by Oleksandr Voloshchuk & Requnex Software
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Cookies Modal -->
+  <div class="cookies-modal-overlay" id="cookies-modal">
+    <div class="cookies-modal">
+      <div class="cookies-icon">
+        <!-- Simple cookie SVG or placeholder -->
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C6A87C" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+          <path d="M8.5 8.5v.01"></path>
+          <path d="M16 15.5v.01"></path>
+          <path d="M12 12v.01"></path>
+          <path d="M11 17v.01"></path>
+          <path d="M7 14v.01"></path>
+        </svg>
+      </div>
+      <h2 class="cookies-title">МЫ ИСПОЛЬЗУЕМ<br>COOKIES</h2>
+      <p class="cookies-text">
+        Чтобы сайт работал корректно и был удобным для вас, мы используем файлы cookies. Продолжая пользоваться сайтом,
+        вы соглашаетесь с нашей <a href="#">Политикой конфиденциальности</a>.
+      </p>
+      <div class="cookies-actions">
+        <button class="cookie-btn accept-btn" id="accept-cookies">Принять все</button>
+        <button class="cookie-btn settings-btn">Настройки cookies</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Popup -->
+  <div class="success-popup-overlay" id="success-popup">
+    <div class="success-popup">
+      <button class="close-popup" id="close-success">×</button>
+      <!-- Green Ribbon Decoration -->
+      <img src="./ribbon-green.png" alt="" class="popup-ribbon">
+
+      <h2 class="success-title">ВАША ЗАЯВКА<br>УСПЕШНО</h2>
+      <p class="success-accent">отправлена!</p>
+      <p class="success-subtitle">Наш менеджер свяжется с вами<br>в ближайшее время</p>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+
+
+<script>
+  gsap.registerPlugin(ScrollTrigger)
+
+  // Переменные
+  const header = document.querySelector('.site-header')
+  const headerBrand = document.querySelector('.header-brand')
+  const headerRow = document.querySelector('.header-main-row')
+  const isMobile = window.innerWidth <= 768
+
+  // Фиксация хедера
+  gsap.set(".site-header", {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    zIndex: 9999
+  })
+
+  if (!isMobile) {
+    // ===== 1. НАЧАЛЬНЫЕ ПОЗИЦИИ (SETUP) =====
+    
+    // Z-индексы: Руки внизу, Рысь посередине, Карта сверху (условно, для переходов)
+    gsap.set(".slide-hands", { zIndex: 1, autoAlpha: 1 }) // Руки сразу видимы, но картинка улетела вверх
+    gsap.set(".slide-lynx", { zIndex: 3 })
+    gsap.set(".slide-map", { zIndex: 2, autoAlpha: 0, x: "100%" }) // Карта справа
+
+    // ХЕДЕР
+    header.classList.remove('header-centered-mode')
+
+    // РУКИ (Настройка под твой запрос)
+    // Картинка с руками: поднята вверх на 100% (на потолке)
+    gsap.set(".slide-hands .hero-bg-img", { y: "-100%", opacity: 0 }) 
+    // Текст рук: опущен вниз (в полу)
+    gsap.set(".slide-hands .hero-title", { y: "100%", opacity: 0 })
+
+    // КАРТА (Элементы внутри)
+    gsap.set(".slide-map .cat-logo", { scale: 0.8, opacity: 0 })
+    gsap.set(".slide-map .map-cta-text, .slide-map .cta-btn", { y: 20, opacity: 0 })
+
+
+    // ===== 2. TIMELINE (СЦЕНАРИЙ) =====
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "+=2500", // Уменьшил дистанцию, чтобы листалось быстрее
+        scrub: 0.5,    // Сделал реакцию более резкой (было 1)
+        pin: true,
+        anticipatePin: 1,
+        snap: {
+          snapTo: "labels", // Магнит к меткам
+          duration: { min: 0.3, max: 0.8 }, // Быстрое прилипание
+          delay: 0, // Без задержки
+          ease: "power1.inOut"
+        }
+      }
+    })
+
+    // --- МЕТКА 1: НАЧАЛО (Рысь) ---
+    tl.addLabel("start")
+
+    // СРАЗУ ЖЕ при скролле:
+    // 1. Логотип уезжает влево
+    tl.to(headerBrand, {
+      x: () => {
+        const brandRect = headerBrand.getBoundingClientRect()
+        const rowRect = headerRow.getBoundingClientRect()
+        return rowRect.left - brandRect.left // Вычисляем край левой границы
+      },
+      duration: 1,
+      ease: "none"
+    }, 0)
+
+    // 2. Рысь уходит влево
+    tl.to(".slide-lynx", {
+      x: "-100%",
+      autoAlpha: 0, // Исчезает
+      duration: 1,
+      ease: "none"
+    }, 0)
+
+    // 3. Карта выезжает справа ОДНОВРЕМЕННО с уходом Рыси (чтобы не было черного экрана)
+    tl.to(".slide-map", {
+      x: "0%",
+      autoAlpha: 1,
+      duration: 1,
+      ease: "none"
+    }, 0) // Тоже в момент времени 0
+
+    // --- Анимация ВНУТРИ карты (быстро) ---
+    tl.to(".slide-map .cat-logo", { scale: 1, opacity: 1, duration: 0.5 }, 0.5)
+    tl.to([".slide-map .map-cta-text", ".slide-map .cta-btn"], { 
+      y: 0, opacity: 1, duration: 0.5, stagger: 0.1 
+    }, 0.6)
+
+    // --- МЕТКА 2: КАРТА (Середина) ---
+    tl.addLabel("map")
+
+    // Пауза небольшая, чтобы зафиксировать карту
+    tl.to({}, { duration: 0.2 })
+
+    // 4. ПЕРЕХОД К РУКАМ
+    // Карта уезжает влево
+    tl.to(".slide-map", {
+      x: "-100%",
+      autoAlpha: 0,
+      duration: 1.5,
+      ease: "power2.inOut"
+    }, "+=0.1")
+
+    // В ЭТО ЖЕ ВРЕМЯ (Спускаем руку с потолка)
+    // Значок "<" означает "начать одновременно с предыдущей анимацией"
+    
+    // Рука спускается сверху (y: -100% -> 0%)
+    tl.to(".slide-hands .hero-bg-img", {
+      y: "0%",
+      opacity: 1,
+      duration: 1.5,
+      ease: "power2.out"
+    }, "<") 
+
+    // Текст поднимается снизу (y: 100% -> 0%)
+    tl.to(".slide-hands .hero-title", {
+      y: "0%",
+      opacity: 1,
+      duration: 1.5,
+      ease: "power2.out"
+    }, "<")
+
+    // --- МЕТКА 3: РУКИ (Финал) ---
+    tl.addLabel("hands")
+  }
+</script>
+</div>
+
+ <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+  
+  <script>
+    // Загрузка нужного файла логики
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = window.isMobile ? './mobile-motion.js' : './main.js';
+    document.body.appendChild(script);
+  </script>
+</body>
+
+</html>

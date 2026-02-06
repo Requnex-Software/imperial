@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>IMPERIAL — Hero Animation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --dark-emerald: #041E1A;
+      --gold: #C5A067;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    header * {
+      pointer-events: auto;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 2px;
+      font-size: 22px;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0b2f27 0%, #000 65%);
+      overflow: hidden;
+    }
+
+    /* Visual layer */
+    .hero-visual {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-model {
+      position: absolute;
+      left: -8%;
+      top: -5%;
+      width: 120%;
+      height: auto;
+      transform: scale(1.15);
+      filter: blur(10px);
+      opacity: 0.95;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15),
+        rgba(0,0,0,0.85)
+      );
+      z-index: 2;
+    }
+
+    /* Text */
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 8%;
+    }
+
+    .hero-main-text {
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .line-1 {
+      display: block;
+      font-size: 56px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      opacity: 0;
+    }
+
+    .line-2 {
+      display: block;
+      font-size: 56px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      margin-top: 8px;
+      opacity: 0;
+    }
+
+    .line-script {
+      display: block;
+      font-family: 'Great Vibes', cursive;
+      font-size: 120px;
+      color: var(--gold);
+      text-transform: none;
+      margin-left: 60px;
+      margin-top: -10px;
+      opacity: 0;
+    }
+
+    /* Mask for transition */
+    svg.hero-mask {
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    /* ================= NEXT SECTION ================= */
+    .next-section {
+      height: 120vh;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">IMPERIAL</div>
+  <div class="header-right">
+    <span>RU</span>
+    <span>Telegram</span>
+    <span>WhatsApp</span>
+    <span>Instagram</span>
+  </div>
+</header>
+
+<section class="hero">
+
+  <!-- SVG mask -->
+  <svg class="hero-mask" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <clipPath id="heroClip">
+        <path id="maskPath" d="M0,0 H100 V100 H0 Z"></path>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="hero-visual" style="clip-path:url(#heroClip)">
+    <!-- ЗАМЕНИ НА СВОЮ КАРТИНКУ -->
+    <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e"
+         alt="Woman with lynx"
+         class="hero-model">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="hero-main-text">
+      <span class="line-1">НАЙДЁМ ВАМ</span>
+      <span class="line-2">МУЖЧИНУ</span>
+      <span class="line-script">мечты</span>
+    </h1>
+  </div>
+
+</section>
+
+<section class="next-section">
+  СЛЕДУЮЩИЙ БЛОК
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* INIT */
+gsap.set(".hero-model", { scale: 1.15, filter: "blur(10px)" });
+gsap.set(".line-1, .line-2", { y: 40, opacity: 0 });
+gsap.set(".line-script", { scale: 0.85, opacity: 0 });
+
+const tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=3000",
+    scrub: true,
+    pin: true
+  }
+});
+
+/* ===== PHASE 1 — НАПЛЫВ ===== */
+tl.to(".hero-model", {
+  scale: 1,
+  filter: "blur(0px)",
+  duration: 1.5,
+  ease: "power3.out"
+}, 0);
+
+/* ===== PHASE 2 — ТИПОГРАФИКА ===== */
+tl.to(".line-1", {
+  y: 0,
+  opacity: 1,
+  duration: 0.6
+}, 0.6);
+
+tl.to(".line-2", {
+  y: 0,
+  opacity: 1,
+  duration: 0.6
+}, 0.9);
+
+tl.to(".line-script", {
+  opacity: 1,
+  scale: 1,
+  duration: 1,
+  ease: "power2.out"
+}, 1.2);
+
+/* ===== PHASE 3 — БЕСШОВНЫЙ ПЕРЕХОД ===== */
+tl.to("#maskPath", {
+  attr: {
+    d: "M0,0 H100 V75 C65,90 35,90 0,75 Z"
+  },
+  duration: 1.6,
+  ease: "power2.inOut"
+}, 2.2);
+
+tl.to(".hero", {
+  scale: 0.92,
+  duration: 1.6,
+  ease: "power2.inOut"
+}, 2.2);
+</script>
+
+</body>
+</html>
